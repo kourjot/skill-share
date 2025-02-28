@@ -5,4 +5,5 @@ const userRouter = Router()
 userRouter.post("/otp-register",sendRegisterOtp)
 userRouter.post("/sign-in",registration)
 userRouter.post("/log-in",login)
+// userRouter.post("/profile",profile)
 export {userRouter}
