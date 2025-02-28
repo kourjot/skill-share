@@ -1,54 +1,43 @@
-import { Avatar, Box, Button, Flex, Heading, HStack, Text, VStack,Image } from "@chakra-ui/react";
-import { FaCog } from "react-icons/fa";
-
+import React from "react";
+import "../Styles/Profile.css"
 export default function Profile() {
   return (
-    <Box bg="black" color="white" minH="100vh" p={5}>
-      <Flex direction={{ base: "column", md: "row" }} align="center" gap={6}>
+    <div className="profile-container">
+      <div className="profile-content">
         {/* Profile Picture */}
-        {/* <Avatar size="xl" name="Ritik Dethliya"></Avatar> */}
-        <Box
-  w="100px"
-  h="100px"
-  borderRadius="full"
-  overflow="hidden"
-  border="2px solid white"
->
-  <Image
-    src="https://via.placeholder.com/150"
-    alt="Profile Picture"
-    objectFit="cover"
-    w="full"
-    h="full"
-  />
-</Box>;
-        
+        <div className="profile-picture-container">
+          <div className="profile-picture">
+            <img src="https://via.placeholder.com/150" alt="Profile" />
+          </div>
+          <button className="edit-profile-btn">Edit Profile</button>
+        </div>
+
         {/* Profile Info */}
-        <VStack align="start" spacing={2}>
-          <HStack spacing={4}>
-            <Heading size="md">_ritik_d</Heading>
-            <Button size="sm" bg="gray.700" _hover={{ bg: "gray.600" }}>Edit profile</Button>
-            <Button size="sm" bg="gray.700" _hover={{ bg: "gray.600" }}>View archive</Button>
-            <FaCog size={18} />
-          </HStack>
+        <div className="profile-info">
+          <div className="profile-header">
+            <h2 className="username">_ritik_d</h2>
+            <button className="view-archive-btn">View Archive</button>
+            <span className="settings-icon">⚙️</span>
+          </div>
 
           {/* Stats */}
-          <HStack spacing="xl">
-            <Text><b>11</b> posts</Text>
-            <Text><b>327</b> followers</Text>
-            <Text><b>328</b> following</Text>
-          </HStack>
+          <div className="profile-stats">
+            <p><b>11</b> posts</p>
+            <p><b>327</b> followers</p>
+            <p><b>328</b> following</p>
+          </div>
 
           {/* Bio */}
-          <VStack align="start" spacing={1}>
-            <Text fontWeight="bold">ritik dethliya</Text>
-            <Text>💤 स्वपिष्यामि यदा प्रियॆ</Text>
-            <Text>🧡 सनातनी__</Text>
-            <Text>💝 navodayan</Text>
-            <Text>😊 गोलगप्पे</Text>
-          </VStack>
-        </VStack>
-      </Flex>
-    </Box>
+          <div className="profile-bio">
+            <p><b>ritik dethliya</b></p>
+            <p>💤 स्वपिष्यामि यदा प्रियॆ</p>
+            <p>🧡 सनातनी__</p>
+            <p>💝 navodayan</p>
+            <p>😊 गोलगप्पे</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
+
