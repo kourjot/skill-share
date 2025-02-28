@@ -1,17 +1,18 @@
 import { profile } from "../model/userProfile.js";
 import { user } from "../model/userModel.js";
+import fs from "fs"
 import {v2} from "cloudinary"
 import jwt from "jsonwebtoken"
 import "dotenv/config"
   // Cloudinary configuration
-  cloudinary.config({
+  v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
   
   export const profileUpload = async (req, res) => {
-      const { token } = req.headers.authorization;
+      const  token  = req.headers.authorization;
       if (!token) {
           return res.status(404).json({ message: "Token needed" });
       }
@@ -21,8 +22,8 @@ import "dotenv/config"
       const photo = req.file.path;
   
       try {
-          const decoded = jwt.verify(token, process.env.JWT_KEY);
-          const { email: userEmail, username: userName } = decoded;
+          const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+          const { email: userEmail, username: username } = decoded;
   
           // Check if the user exists in the database
           const userExist = await user.findOne({ email: userEmail });
@@ -38,6 +39,7 @@ import "dotenv/config"
               // Upload the new photo to Cloudinary if provided
               const uploadResponse = await v2.uploader.upload(photo);
               url = uploadResponse.secure_url;
+              fs.unlinkSync(photo)
           }
   
           // Prepare the fields to be updated or added
@@ -63,7 +65,7 @@ import "dotenv/config"
               // If no profile exists, create a new one
               const newProfile = new profile({
                   userId: userExist._id,
-                  username: userName,
+                  username: username,
                   skills: skills || [],
                   description: description || '',
                   image: url || '',  // Default to empty if no image
