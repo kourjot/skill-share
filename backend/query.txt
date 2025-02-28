@@ -4,6 +4,4 @@ photo string
 likeBy [string]
 comments [ObjectId ref:"user"]
 like:Number
-
-
 photoSchema
