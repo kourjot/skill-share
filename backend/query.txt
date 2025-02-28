@@ -1,0 +1,7 @@
+userID =ref:"user"
+description string 
+photo string
+likeBy [string]
+comments [ObjectId ref:"user"]
+like:Number
+photoSchema
