@@ -1,5 +1,8 @@
 import Profile from "./Components/TopComponent";
 import Post from "./Components/PostSection";
+import {Routes,Route} from 'react-router-dom'
+import Login from "./Pages/LoginPage";
+
 function App() {
   const samplePost = {
     user: {
@@ -14,6 +17,9 @@ function App() {
     <>
      <Profile/>
      <Post {...samplePost} />
+     <Routes>
+      <Route to="/login" element={<Login/>}/>
+     </Routes>
     </>
    );
 }
