@@ -56,7 +56,7 @@ import "dotenv/config"
         }
         const hashed=await argon2.verify(dbExist.password,password)
         if(hashed){
-        const token=jwt.sign({email:email},process.env.jwt_key,{expiresIn:"2day"})
+        const token=jwt.sign({email:email},process.env.JWT_SECRET_KEY,{expiresIn:"2day"})
         // console.log(token)
         return res.status(200).json({token:token})
         }
