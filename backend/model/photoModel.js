@@ -33,6 +33,7 @@ const photoSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "user", 
+        text: { type: String, required: true },
       },
     ],
     likes: {
