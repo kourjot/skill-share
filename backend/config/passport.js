@@ -5,7 +5,7 @@ import { user } from "../model/userModel.js";
 import jwt from "jsonwebtoken";
 
 dotenv.config();
-const callback=process.env.CALLBACK_URL
+
 passport.use(
   new GitHubStrategy(
     {

@@ -109,12 +109,8 @@ const getProfile=async(req,res)=>{
             return res.status(400).json({ message: "User does not exist" });
         }
         
-
-        const findUser=await user.findOne({ email: userEmail})
-        if(!findUser){
-            return res.status(404).json({message:"User not found"})
-        }
         const findProfile=await profile.findOne({userId:findUser._id,username})
+
         if(!findProfile){
             return res.status(404).json({message:"Profile not found"})
         }
@@ -124,5 +120,22 @@ const getProfile=async(req,res)=>{
         return res.status(500).json({ message: "Internal server error" });
     }
 }
-  
-export { profileUpload,getProfile}
+const getUserProfileByName=async(req,res)=>{
+    try{
+        const {username}=req.params
+        const findUser=await profile.findOne({username:{$regex:new RegExp(username,"i")}})
+        if (!findUser){
+            return res.status(404).json({message:"User not found"})
+        }
+        res.status(200).json({
+            username:findUser.username,
+            email:findUser.email,
+            skills:findUser.skills,
+            image:findUser.image || "",
+        })
+    }catch(err){
+        console.error("Error in get Profile By Username", err);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+export { profileUpload,getProfile,getUserProfileByName}
