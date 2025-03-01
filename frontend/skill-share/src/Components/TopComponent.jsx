@@ -4,6 +4,8 @@ import "../Styles/Profile.css";
 import NavBar from "./Navbar";
 import Aside from "./Aside";
 import Post from "./PostSection";
+import { NavLink } from "react-router-dom";
+import DisplayPost from "./DisplayPost";
 
 export default function Profile() {
   const [userProfile, setUserProfile] = useState(null); // State to store profile data
@@ -13,13 +15,14 @@ export default function Profile() {
     // Fetch user profile data from API
     const fetchUserProfile = async () => {
       try {
-        // const token = localStorage.getItem("token"); // Get token from localStorage or cookies
-        const response = await axios.get("http://localhost:3110/getprofile", {
+        const token = localStorage.getItem("token"); // Get token from localStorage or cookies
+        const response = await axios.get("https://skill-share-c93a.onrender.com/getprofile", {
           headers: {
-            Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzMxMGY0ZmY3ZDE1MzYzZGMzMzJkMSIsInVzZXJuYW1lIjoidmlqYXkiLCJlbWFpbCI6InZpamF5bmltYXIwMDdAZ21haWwuY29tIiwiaWF0IjoxNzQwODM3MTQyLCJleHAiOjE3NDEwMDk5NDJ9.j2Mcbrk_hdW9jJ_hUwTVz6QMeMVKXQbLtoqp5DQtCV0" , // Pass token in the Authorization header
+            Authorization:token
           },
         });
         setUserProfile(response.data.userProfile); // Set the response data into state
+        console.log(response.data)
         setLoading(false); // Stop loading once data is fetched
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -54,7 +57,8 @@ export default function Profile() {
                 alt="Profile"
               />
             </div>
-            <button className="edit-profile-btn">Edit Profile</button>
+
+            <NavLink to="/updateprofile/"><button className="edit-profile-btn">Edit Profile</button></NavLink>
           </div>
 
           {/* Profile Info */}
@@ -82,13 +86,15 @@ export default function Profile() {
               <p>
                 <b>{userProfile.username}</b>
               </p>
-              <p>{userProfile.bio}</p>
+              {/* <p>{userProfile.bio}</p> */}
               <p>{userProfile.skills}</p>
+              <p>{userProfile.description}</p>
             </div>
           </div>
         </div>
       </div>
-      <Post />
+      {/* <Post /> */}
+      <DisplayPost/>
     </>
   );
 }
