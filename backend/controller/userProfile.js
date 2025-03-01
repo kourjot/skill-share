@@ -70,7 +70,7 @@ const profileUpload = async (req, res) => {
 
           if (existProfile) {
               // If profile exists, update it
-            //   console.log("existProfile",existProfile)
+              console.log("existProfile",existProfile)
             await profile.findByIdAndUpdate(existProfile._id, { $set: updateFields });
               return res.status(200).json({ message: "Profile updated successfully" });
           } else {
@@ -113,14 +113,14 @@ const profileUpload = async (req, res) => {
 
         // Check if the profile exists for the user
         const findProfile = await profile.findOne({ userId: findUser._id, username });
-        
+        console.log(findProfile);
         if (!findProfile) {
-            // console.log("User profile not found. Returning dummy data.");
+            console.log("User profile not found. Returning dummy data.");
 
             // Create dummy profile data
             let newData = {
                 userId: findUser._id,
-                username: username,
+                username: "ajay",
                 skills: "",
                 description: '',
                 image: "",
@@ -131,7 +131,7 @@ const profileUpload = async (req, res) => {
             };
 
             // Optionally, save the dummy profile to the database
-            // const createdProfile = await profile.create(newData);
+            const createdProfile = await profile.create(newData);
 
             return res.status(200).json({ userProfile: newData });
         }
