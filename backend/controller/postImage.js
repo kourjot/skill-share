@@ -64,3 +64,27 @@ export const uploadImage=async(req,res)=>{
         res.status(500).json({message:"error in uploadImage"})
     }
 }
+
+
+export const getAillImage=async(req,res)=>{
+    const token=req.headers.authorization
+    if(!token){
+        return res.status(404).json({message:"token needed"})
+    }
+    try{
+        const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
+        const {email,username}=decoded
+        const data=await Images.findOne({email})
+        const images=data.images
+        console.log(images.length)
+        let arr=[]
+        for(let i=0;i<images.length;i++){
+            let dataImage=await Photo.findOne({_id:images[i]})
+            arr.push(dataImage)
+        }
+        res.status(200).json({photos:arr})
+    }catch(err){
+        console.log(err)
+        res.status(500).json({message:"error in get all image"})
+    }
+}
