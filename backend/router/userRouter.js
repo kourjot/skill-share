@@ -4,7 +4,7 @@ import {login,registration} from "../controller/userController.js"
 import {sendRegisterOtp} from "../controller/nodemailerController.js"
 
 import { profileMulter } from "../middleware/multer.js"
-
+import { uploadImage } from "../controller/postImage.js"
 import { profileUpload,getProfile} from "../controller/userProfile.js"
 import  {tokenVerify} from "../middleware/tokenMiddleware.js"
 import  {forgotPassword} from "../controller/forgotPasswordController.js" 
@@ -18,5 +18,5 @@ userRouter.post("/forgotPassword",forgotPassword)
 userRouter.post("/resetPassword",resetpassword)
 userRouter.post("/profile",profileMulter.single("image"),profileUpload)
 userRouter.get("/getprofile",tokenVerify,getProfile)
-
+userRouter.post("/uploadPost",profileMulter.single("post"),uploadImage)
 export {userRouter}
