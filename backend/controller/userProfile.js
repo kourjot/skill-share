@@ -88,30 +88,3 @@ import "dotenv/config"
       }
   };
   
-
-// const getprofile = aysnc(req,res)=>{
-//     const  token  = req.headers.authorization;
-//     if (!token) {
-//         return res.status(404).json({ message: "Token needed" });
-//     }
-//     try {
-//         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-//         const { email: userEmail, username: username } = decoded;
-//         const userExist = await user.findOne({ email: userEmail });
-//         if (!userExist) {
-//             return res.status(400).json({ message: "User does not exist" });
-//         }
-//         const profileExist = await profile.findOne({ username: username });
-//         if (!profileExist) {
-//             return res.status(404).json({ message: "Profile does not exist" });
-//         }
-//         return res.status(200).json({
-//             userProfile: profileExist,
-//         });
-        
-//     } catch (err) {
-//         console.error("Error:", err);
-//         return res.status(500).json({ message: "Internal server error" });
-    
-//     }
-// }
