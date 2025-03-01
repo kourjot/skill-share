@@ -1,5 +1,6 @@
 import { profile } from "../model/userProfile.js";
-import { user } from "../model/userModel.js";
+import { user } from "../model/userModel.js"
+import path from "path"
 import fs from "fs"
 import {v2} from "cloudinary"
 import jwt from "jsonwebtoken"
@@ -19,8 +20,12 @@ import "dotenv/config"
   
       // Destructure values from the request body
       const { skills, description } = req.body;
-      const photo = req.file.path;
-  
+    //   const photo = req.file.path;
+    let photo;
+    if (req.file.path) {
+        photo = req.file.path;
+    
+    }
       try {
           const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
           const { email: userEmail, username: username } = decoded;
@@ -71,7 +76,10 @@ import "dotenv/config"
                   image: url || '',  // Default to empty if no image
               });
               await newProfile.save();
-              return res.status(201).json({ message: "Profile created successfully" });
+              console.log(newProfile)
+              return res.status(201).json({ message: "Profile created successfully" ,
+                userProfile: newProfile,
+              });
           }
   
       } catch (err) {
