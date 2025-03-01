@@ -16,7 +16,7 @@ export default function Profile() {
         // const token = localStorage.getItem("token"); // Get token from localStorage or cookies
         const response = await axios.get("http://localhost:3110/getprofile", {
           headers: {
-            Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzIyZjU4ODRhNDI5MGY4Yzk5Y2E2ZCIsInVzZXJuYW1lIjoiam90IiwiZW1haWwiOiJwa291cjYxODhAZ21haWwuY29tIiwiaWF0IjoxNzQwNzc5Mzc2LCJleHAiOjE3NDA5NTIxNzZ9.tq_vKyT277HxUwJJZKubtiSyEk73gvadt2RQgb5f3jY" , // Pass token in the Authorization header
+            Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzMxMGY0ZmY3ZDE1MzYzZGMzMzJkMSIsInVzZXJuYW1lIjoidmlqYXkiLCJlbWFpbCI6InZpamF5bmltYXIwMDdAZ21haWwuY29tIiwiaWF0IjoxNzQwODM3MTQyLCJleHAiOjE3NDEwMDk5NDJ9.j2Mcbrk_hdW9jJ_hUwTVz6QMeMVKXQbLtoqp5DQtCV0" , // Pass token in the Authorization header
           },
         });
         setUserProfile(response.data.userProfile); // Set the response data into state
