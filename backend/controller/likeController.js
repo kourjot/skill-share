@@ -8,7 +8,7 @@ const likePhoto =async(req,res)=>{
         const  token  = req.headers.authorization;
    
         if (!token) {
-            return res.status(404).json({ message: "Token needed" });
+            return res.status(404).json({ message: "Token  is needed" });
         }
         
 
