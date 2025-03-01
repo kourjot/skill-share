@@ -6,6 +6,14 @@ const photoSchema = new Schema(
       ref: "user", 
       required: true,
     },
+    userProfile:{
+      type:String,
+      default:""
+    },
+    username:{
+      type:String,
+      required:true
+    },
     email:{
        type:String
     },
