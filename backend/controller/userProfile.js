@@ -79,10 +79,8 @@ const profileUpload = async (req, res) => {
                   image: url || '',  // Default to empty if no image
               });
               await newProfile.save();
-              console.log(newProfile)
-              return res.status(201).json({ message: "Profile created successfully" ,
-                userProfile: newProfile,
-              });
+            //   console.log(newProfile)
+              return res.status(201).json({ message: "Profile created successfully"});
           }
   
       } catch (err) {
