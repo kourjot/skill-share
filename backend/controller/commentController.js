@@ -45,5 +45,20 @@ const commentPost=async(req,res)=>{
         return res.status(500).json({message:"server error"})
     }
 }
-
-export {commentPost}
+const getAllComments =async(req,res)=>{
+    try{
+        const {postId}=req.params
+        if(!postId){
+            return res.status(400).json({message:"post id required"})
+        }
+        const ImageExist=await Photo.findById(postId)
+        if(!ImageExist){
+            return res.status(404).json({message:"image not found"})
+        }
+        res.status(200).json({comments:ImageExist.comments})
+    }catch(err){
+        console.log("Error in getting image",err);
+        return res.status(500).json({message:"server error"})
+    }
+}
+export {commentPost,getAllComments}
