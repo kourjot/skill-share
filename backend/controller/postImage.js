@@ -1,6 +1,7 @@
 import { Photo } from "../model/photoModel.js";
 import { user } from "../model/userModel.js";
 import { Images } from "../model/allImagesModel.js";
+import { profile } from "../model/userProfile.js";
 import jwt from "jsonwebtoken"
 import {v2} from "cloudinary"
 import fs from "fs"
@@ -35,9 +36,17 @@ export const uploadImage=async(req,res)=>{
             url=reponse.secure_url
              await fs.promises.unlink(photo);  // Asynchronous file deletion
         }
+        let userProfile="";
+        const userImage=await profile.findOne({email})
+        if(userImage){
+            if(userImage.image)
+            userProfile=userImage.image
+        }
         let newPhoto=new Photo({
             userId:userExist._id,
             description:description,
+            username:username,
+            userProfile:userProfile,
             photo:url,
             likeBy:[],
             comments:[],
@@ -62,5 +71,29 @@ export const uploadImage=async(req,res)=>{
     }catch(err){
         console.log(err)
         res.status(500).json({message:"error in uploadImage"})
+    }
+}
+
+
+export const getAillImage=async(req,res)=>{
+    const token=req.headers.authorization
+    if(!token){
+        return res.status(404).json({message:"token needed"})
+    }
+    try{
+        const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
+        const {email,username}=decoded
+        const data=await Images.findOne({email})
+        const images=data.images
+        // console.log(images.length)
+        let arr=[]
+        for(let i=0;i<images.length;i++){
+            let dataImage=await Photo.findOne({_id:images[i]})
+            arr.push(dataImage)
+        }
+        res.status(200).json({photos:arr})
+    }catch(err){
+        console.log(err)
+        res.status(500).json({message:"error in get all image"})
     }
 }

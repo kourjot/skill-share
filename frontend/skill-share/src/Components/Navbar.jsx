@@ -19,11 +19,12 @@ function NavBar() {
 
             {/* Navigation Icons */}
             <div className={`nav-right ${menuOpen ? "open" : ""}`}>
-                <NavLink to='/'><FiHome className="nav-icon" /></NavLink>
+                <NavLink to='/home'><FiHome className="nav-icon" /></NavLink>
                 
                 <FiSearch className="nav-icon mobile-hide" />
                 <NavLink to="/uploadpost/"><FiPlusSquare className="nav-icon" /></NavLink>
-                <FiHeart className="nav-icon" />
+                
+                <NavLink to="/likedpost/"><FiHeart className="nav-icon" /></NavLink>
                 <NavLink to='/profile/'><FiUser className="nav-icon" /></NavLink>
                 
             </div>
