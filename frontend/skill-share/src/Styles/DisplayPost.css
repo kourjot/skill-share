@@ -1,20 +1,29 @@
-/* styles.css */
-.postcontainer {
-    max-width: 600px;
-    margin-left: 250px;
+.displaypostcontainer {
+    max-width: 700px;
+    margin-left: 280px;
     margin-top: 50px;
     padding: 16px;
     justify-content: center;
     align-items: center;
   }
+  @media screen and (min-width:900px) {
+    .displaypostcontainer {
+        max-width: 1200px;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(200px,300px));
+
+    }
+    
+  }
   @media screen and (max-width:768px) {
-    .postcontainer {
+    .displaypostcontainer {
         margin-left: 80px;
     }
     
   }
   @media screen and (max-width:480px) {
-    .postcontainer {
+    .displaypostcontainer {
         margin-left: 0px;
     }
     
@@ -95,6 +104,7 @@
   .post-image {
     border-radius: 8px;
     width: 100%;
+    min-height: 200px;
   }
   
   .post-actions {

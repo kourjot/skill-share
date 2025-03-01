@@ -8,7 +8,7 @@ export const PostDataContextProvider=({children})=>{
     const [postdata,setPostdata]=useState([])
     async function getPostData(){
         try{
-            const responce=await axios.get("https://fakestoreapi.com/products")
+            const responce=await axios.get("https://skill-share-c93a.onrender.com/getMyPosts")
             const data=responce.data
             setPostdata(responce.data)
             console.log(data)

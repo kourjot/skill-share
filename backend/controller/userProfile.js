@@ -70,7 +70,7 @@ const profileUpload = async (req, res) => {
 
           if (existProfile) {
               // If profile exists, update it
-            //   console.log("existProfile",existProfile)
+              console.log("existProfile",existProfile)
             await profile.findByIdAndUpdate(existProfile._id, { $set: updateFields });
               return res.status(200).json({ message: "Profile updated successfully" });
           } else {
@@ -93,24 +93,26 @@ const profileUpload = async (req, res) => {
       }
   };
 
-const getProfile=async(req,res)=>{
-    try{
-        const  token  = req.headers.authorization;
-       
+  const getProfile = async (req, res) => {
+    try {
+        const token = req.headers.authorization;
+
         if (!token) {
             return res.status(404).json({ message: "Token needed" });
         }
+
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const { email: userEmail, username: username } = decoded;
+        const { email, username } = decoded;
 
         // Check if the user exists in the database
-        const userExist = await user.findOne({ email: userEmail });
-        if (!userExist) {
-            return res.status(400).json({ message: "User does not exist" });
+        const findUser = await user.findOne({ email });
+        if (!findUser) {
+            console.log("User not found");
+            return res.status(404).json({ message: "User not found" });
         }
         
-        const findProfile=await profile.findOne({userId:findUser._id,username})
 
+        const findProfile=await profile.findOne({userId:findUser._id,username})
         if(!findProfile){
             return res.status(404).json({message:"Profile not found"})
         }
@@ -120,22 +122,5 @@ const getProfile=async(req,res)=>{
         return res.status(500).json({ message: "Internal server error" });
     }
 }
-const getUserProfileByName=async(req,res)=>{
-    try{
-        const {username}=req.params
-        const findUser=await profile.findOne({username:{$regex:new RegExp(username,"i")}})
-        if (!findUser){
-            return res.status(404).json({message:"User not found"})
-        }
-        res.status(200).json({
-            username:findUser.username,
-            email:findUser.email,
-            skills:findUser.skills,
-            image:findUser.image || "",
-        })
-    }catch(err){
-        console.error("Error in get Profile By Username", err);
-        return res.status(500).json({ message: "Internal server error" });
-    }
-}
-export { profileUpload,getProfile,getUserProfileByName}
+  
+export { profileUpload,getProfile}

@@ -28,7 +28,7 @@ function App() {
       "https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=600"
       ] }}/>}/>
         <Route element={<PrivateRoute isAuthenticate={isAuthenticated} />}>
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/" element={<Profile />} />
         </Route>
         <Route path="/LoginForm" element={<LoginForm/>}/>
         <Route path="/signin/" element={<SignIn/>}/>
