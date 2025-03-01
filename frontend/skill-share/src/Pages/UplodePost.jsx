@@ -35,14 +35,14 @@ function PostUpload() {
 
         try {
             // Send a POST request to the backend to upload the image and description
-            // const token = localStorage.getItem("token"); // Assuming you have the token stored in localStorage
+            const token = localStorage.getItem("token"); // Assuming you have the token stored in localStorage
             const response = await axios.post(
-                "http://localhost:3110/uploadPost", // Your backend endpoint
+                "https://skill-share-c93a.onrender.com/uploadPost", // Your backend endpoint
                 formData,
                 {
                     headers: {
                         "Content-Type": "multipart/form-data",
-                        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzJhNGNlNTI3MTAyOGIzODM1MTYwZiIsInVzZXJuYW1lIjoidmlqYXkiLCJlbWFpbCI6InZpamF5bmltYXI4QGdtYWlsLmNvbSIsImlhdCI6MTc0MDgxNDk2NiwiZXhwIjoxNzQwOTg3NzY2fQ.UqToFXB98W5H5-IbRomId2PuVVxH4wLsL28t7nS2rp8", // Include the token for authentication
+                        Authorization: token
                     },
                 }
             );
