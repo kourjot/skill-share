@@ -11,6 +11,7 @@ import { profileUpload,getProfile,getUserProfileByName} from "../controller/user
 import  {tokenVerify} from "../middleware/tokenMiddleware.js"
 import  {forgotPassword} from "../controller/forgotPasswordController.js" 
 import {resetpassword} from "../controller/resetPasswordController.js"
+import {commentPost} from "../controller/commentController.js"
 const userRouter = Router()
 
 userRouter.post("/otp-register",sendRegisterOtp)
@@ -25,4 +26,6 @@ userRouter.get("/getprofile",tokenVerify,getProfile)
 userRouter.get("/getUserProfileByName/:username",getUserProfileByName)
 userRouter.post("/uploadPost",profileMulter.single("post"),uploadImage)
 userRouter.get("/getMyPosts",tokenVerify,getAillImage)
+userRouter.post("/commentPost/:postId",tokenVerify,commentPost)
+
 export {userRouter}
