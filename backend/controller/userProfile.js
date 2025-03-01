@@ -95,33 +95,49 @@ const profileUpload = async (req, res) => {
 
   const getProfile = async (req, res) => {
     try {
-        const token = req.headers.authorization;
-
-        if (!token) {
-            return res.status(404).json({ message: "Token needed" });
-        }
-
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const { email, username } = decoded;
-
-        // Check if the user exists in the database
-        const findUser = await user.findOne({ email });
-        if (!findUser) {
-            console.log("User not found");
-            return res.status(404).json({ message: "User not found" });
-        }
-        
-
-        const findProfile=await profile.findOne({userId:findUser._id,username})
-        if(!findProfile){
-            return res.status(404).json({message:"Profile not found"})
-        }
-        return res.status(200).json({userProfile:findProfile})
-    }catch(err){
-        console.error("Error:", err);
-        return res.status(500).json({ message: "Internal server error" });
+      const token = req.headers.authorization;
+  
+      if (!token) {
+        return res.status(404).json({ message: "Token needed" });
+      }
+  
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      const { email, username } = decoded;
+  
+      // Check if the user exists in the database
+      const findUser = await user.findOne({ email });
+      if (!findUser) {
+        console.log("User not found");
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      // Find the user's profile
+      const findProfile = await profile.findOne({ userId: findUser._id, username });
+      if (!findProfile) {
+        // If profile not found, return dummy data
+        return res.status(200).json({
+          userProfile: {
+            userId: findUser._id,
+            image: "",  // default empty image
+            username: username,
+            skills: "Not set",  // dummy value for skills
+            description: "No description available",  // dummy value for description
+            totalFollower: 0,
+            totalFollows: 0,
+            followers: [],
+            follows: []
+          }
+        });
+      }
+  
+      return res.status(200).json({ userProfile: findProfile });
+  
+    } catch (err) {
+      console.error("Error:", err);
+      return res.status(500).json({ message: "Internal server error" });
     }
-}
+  };
+  
 const getUserProfileByName = async (req, res) => {
     try {
       const { username } = req.params; // ✅ Extract from params, not query
