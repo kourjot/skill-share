@@ -120,7 +120,7 @@ const profileUpload = async (req, res) => {
             // Create dummy profile data
             let newData = {
                 userId: findUser._id,
-                username: findUser._id,
+                username: findUser.username,
                 skills: "",
                 description: '',
                 image: "",
