@@ -5,8 +5,8 @@ const profileSchema=new Schema({
     username:{type:String,unique:true,required:true},
     skills:[String],
     description:{type:String},
-    totalFollower:{Type:Number,default:0},
-    totalFollows:{Type:Number,default:0},
+    totalFollower:{type:Number,default:0},
+    totalFollows:{type:Number,default:0},
     follwers:[Number],
     follows:[Number]
 })
