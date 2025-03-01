@@ -61,7 +61,7 @@ const profileUpload = async (req, res) => {
           if (url) {
               updateFields.image = url;
           }
-  
+        console.log("jot")
           if (existProfile) {
               // If profile exists, update it
               await profile.updateOne({ _id: userExist._id }, { $set: updateFields });
