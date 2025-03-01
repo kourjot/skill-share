@@ -24,9 +24,7 @@ function App() {
       
       <Routes>
         <Route path='/' element={<LoginForm/>}/>
-        <Route path='/home' element={<MainPost data={{ user:"ritik", title:"there is am using to Capture the nature", description:"NAture love us we also need to love nature", hashtag:"Nature", images:["https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&w=600",
-      "https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=600"
-      ] }}/>}/>
+        <Route path='/home' element={<MainPost/>}/>
         <Route element={<PrivateRoute isAuthenticate={isAuthenticated} />}>
             <Route path="/profile/" element={<Profile />} />
         </Route>
