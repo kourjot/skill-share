@@ -18,11 +18,7 @@ export default function Profile() {
         const token = localStorage.getItem("token"); // Get token from localStorage or cookies
         const response = await axios.get("https://skill-share-c93a.onrender.com/getprofile", {
           headers: {
-<<<<<<< HEAD
             Authorization:token
-=======
-            Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YzMxMGY0ZmY3ZDE1MzYzZGMzMzJkMSIsInVzZXJuYW1lIjoidmlqYXkiLCJlbWFpbCI6InZpamF5bmltYXIwMDdAZ21haWwuY29tIiwiaWF0IjoxNzQwODM3MTQyLCJleHAiOjE3NDEwMDk5NDJ9.j2Mcbrk_hdW9jJ_hUwTVz6QMeMVKXQbLtoqp5DQtCV0" , // Pass token in the Authorization header
->>>>>>> 71b85f99c71f3d732bef4993c154a5fc00bde9ea
           },
         });
         setUserProfile(response.data.userProfile); // Set the response data into state
