@@ -1,5 +1,6 @@
 import { user } from "../model/userModel.js";
 import { registerOtp } from "../model/registerOtpModel.js";
+import { Photo } from "../model/photoModel.js";
 import jwt from "jsonwebtoken"
 
 import argon2 from "argon2"
@@ -67,4 +68,16 @@ import "dotenv/config"
         res.status(500).json({msg:"server error in login"})
     }
 }
+
+
+export const allphoto=async(req,res)=>{
+    try{
+        const data=await Photo.find()
+        res.status(200).json({data:data})
+    }catch(err){
+        res.status(500).json({message:"error in get all photo"})
+    }
+}
+
 export {login,registration}
+
