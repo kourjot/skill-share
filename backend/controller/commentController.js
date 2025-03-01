@@ -45,20 +45,45 @@ const commentPost=async(req,res)=>{
         return res.status(500).json({message:"server error"})
     }
 }
-const getAllComments =async(req,res)=>{
-    try{
-        const {postId}=req.params
-        if(!postId){
-            return res.status(400).json({message:"post id required"})
+const getAllComments = async (req, res) => {
+    try {
+        const { postId } = req.params; // Get post ID from request params
+
+        if (!postId) {
+            return res.status(400).json({ message: "Post ID is required" });
         }
-        const ImageExist=await Photo.findById(postId)
-        if(!ImageExist){
-            return res.status(404).json({message:"image not found"})
+
+        // Find the post by ID
+        const ImageExist = await Photo.findById(postId);
+
+        if (!ImageExist) {
+            return res.status(404).json({ message: "Image not found" });
         }
-        res.status(200).json({comments:ImageExist.comments})
-    }catch(err){
-        console.log("Error in getting image",err);
-        return res.status(500).json({message:"server error"})
+
+        // Fetch user profiles for each comment
+        const commentsWithProfiles = await Promise.all(
+            ImageExist.comments.map(async (comment) => {
+                const userInfo = await user.findOne({ username: comment.username });
+
+                return {
+                    username: comment.username,
+                    text: comment.text,
+                    userProfile: userInfo ? userInfo.userProfile : "" // If no profile image, return empty
+                };
+            })
+        );
+
+        // Send response with comments & profile images
+        res.status(200).json({ 
+            postId: ImageExist._id, 
+            photo: ImageExist.photo, 
+            comments: commentsWithProfiles 
+        });
+
+    } catch (err) {
+        console.log("Error in getting comments", err);
+        return res.status(500).json({ message: "Server error" });
     }
-}
+};
+
 export {commentPost,getAllComments}
