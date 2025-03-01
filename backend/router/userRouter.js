@@ -1,4 +1,6 @@
 import {Router} from "express"
+import passport from "passport";
+import { githubAuth, githubCallback } from "../controller/githubAuthController.js";
 import {login,registration} from "../controller/userController.js"
 
 import {sendRegisterOtp} from "../controller/nodemailerController.js"
@@ -16,6 +18,8 @@ userRouter.post("/sign-in",registration)
 userRouter.post("/log-in",login)
 userRouter.post("/forgotPassword",forgotPassword)
 userRouter.post("/resetPassword",resetpassword)
+userRouter.get("/auth/github", githubAuth);
+userRouter.get("/auth/github/callback", githubCallback);
 userRouter.post("/profile",profileMulter.single("image"),profileUpload)
 userRouter.get("/getprofile",tokenVerify,getProfile)
 userRouter.post("/uploadPost",profileMulter.single("post"),uploadImage)
