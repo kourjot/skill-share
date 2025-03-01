@@ -1,11 +1,29 @@
 import { useContext } from 'react';
 import { PostDataContext } from '@/ContextApi/PostData';
 import '../Styles/DisplayPost.css';
+import axios from 'axios';
 
 function DisplayPost() {
   const [postdata] = useContext(PostDataContext);
 
-  console.log('Post Data Length:', Array.isArray(postdata) ? postdata.length : 'Not an array');
+  console.log('Post Data Length:', Array.isArray(postdata) ? postdata : 'Not an array');
+
+  async function sendPostData(id){
+    console.log(id)
+    const token = localStorage.getItem("token");
+    //console.log(user,title,description)
+      try{
+        const responce= await axios.post("https://skill-share-c93a.onrender.com/allPhoto",id,{
+          headers: {
+            Authorization:token
+          },
+        })
+      }
+      catch(err){
+        console.log(err.message)
+      }
+      
+  }
 
   return (
     <div className="displaypostcontainer">
@@ -42,7 +60,7 @@ function DisplayPost() {
             </div>
             <div className="post-actions">
               <span>👍 {post.likes}</span>
-              <span>💬 Comment</span>
+              <span onClick={()=>sendPostData(post["_id"])} id="comment">💬 Comment</span>
               <span>🔄 Repost</span>
               <span>📤 Send</span>
             </div>
