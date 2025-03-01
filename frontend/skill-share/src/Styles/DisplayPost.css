@@ -37,7 +37,7 @@
     margin-bottom: 16px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 20px;
   }
   
   .post-input {
@@ -96,8 +96,6 @@
   
   .post-images {
     margin-top: 8px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
   

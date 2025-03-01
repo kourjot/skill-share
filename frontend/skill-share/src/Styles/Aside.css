@@ -47,7 +47,8 @@
     align-items: center;
     gap: 15px;
     padding: 10px;
-    font-size: 18px;
+    font-size: 20px;  /* Increased from 18px */
+    font-weight: 600;  /* Added font weight (semi-bold) */
     color: #333;
     text-decoration: none;
     transition: background 0.3s;
@@ -60,7 +61,7 @@
 
 /* Navigation Icons */
 .nav-icon {
-    font-size: 24px;
+    font-size: 28px;  /* Increased from 24px */
 }
 
 /* Collapse Text When Sidebar is Closed */
@@ -84,5 +85,4 @@
     .sidebar {
         display: none;
     }
-    
 }
