@@ -6,8 +6,8 @@ import "dotenv/config"
 const transport=nodemailer.createTransport({
     host:"smtp.gmail.com",
     auth:{
-        user:process.env.gmail_nodemailer,
-        pass:process.env.gmail_nodemailer_password
+        user:process.env.GMAIL_NODEMAILER,
+        pass:process.env.GMAIL_NODEMAILER_PASS
     }
 })
 
