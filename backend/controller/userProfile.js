@@ -110,14 +110,14 @@ const getProfile=async(req,res)=>{
         const findProfile=await profile.findOne({userId:findUser._id,username})
         // console.log(findProfile)
         if(!findProfile){
-            let newData= new profile({
-               userId:userExist._id ,
+            let newData= {
+               userId:findUser._id ,
                username: username,
                skills:  [],
                description: '',
                image: ""
-           })
-           await newData.save()
+           }
+        //    await newData.save()
             return res.status(404).json({message:newData})
         }
          res.status(200).json({userProfile:findProfile})
