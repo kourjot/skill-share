@@ -27,7 +27,7 @@ const profileUpload = async (req, res) => {
         photo = req.file.path;
     
     }
-    console.log(process.env.JWT_SECRET_KEY)
+    // console.log(process.env.JWT_SECRET_KEY)
       try {
           const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
           const { email,username } = decoded;
@@ -64,9 +64,9 @@ const profileUpload = async (req, res) => {
               updateFields.image = url;
           }
 
-        console.log("jot")
+        // console.log("jot")
 
-          console.log(updateFields);
+        //   console.log(updateFields);
 
           if (existProfile) {
               // If profile exists, update it
