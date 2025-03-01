@@ -1,0 +1,135 @@
+/* styles.css */
+.postcontainer {
+    max-width: 600px;
+    margin-left: 250px;
+    margin-top: 50px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media screen and (max-width:768px) {
+    .postcontainer {
+        margin-left: 80px;
+    }
+    
+  }
+  @media screen and (max-width:480px) {
+    .postcontainer {
+        margin-left: 0px;
+    }
+    
+  }
+  .post-box {
+    background: white;
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .post-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid gray;
+    border-radius: 6px;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    background: gray;
+    border-radius: 50%;
+  }
+  
+  .post {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+  }
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .username {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .user-role {
+    margin: 0;
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .post-title {
+    margin-top: 8px;
+    font-weight: bold;
+  }
+  
+  .post-description {
+    color: gray;
+    font-size: 14px;
+  }
+  
+  .post-hashtag {
+    color: blue;
+    font-size: 14px;
+  }
+  
+  .post-images {
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .post-image {
+    border-radius: 8px;
+    width: 100%;
+  }
+  
+  .post-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    color: gray;
+    font-size: 14px;
+  }
+  
+  .ad-banner {
+    background: #f3f3f3;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ad-title {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .ad-description {
+    color: gray;
+  }
+  
+  .ad-button {
+    margin-top: 8px;
+    background: blue;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  

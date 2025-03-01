@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiHome, FiSearch, FiMessageSquare, FiPlusSquare, FiHeart, FiUser, FiMenu } from "react-icons/fi";
 import "../Styles/Aside.css";
-
+import { NavLink } from "react-router-dom";
 function Aside() {
     const [isOpen, setIsOpen] = useState(true);
 
@@ -15,24 +15,30 @@ function Aside() {
 
             {/* Navigation Links */}
             <nav className="sidebar-nav">
-                <a href="#" className="nav-item">
+                
+                <NavLink to='/home'  className="nav-item">   
                     <FiHome className="nav-icon" /> {isOpen && <span>Home</span>}
-                </a>
-                <a href="#" className="nav-item">
+                </NavLink>
+                <NavLink to="/" className="nav-item">
+                
                     <FiSearch className="nav-icon" /> {isOpen && <span>Search</span>}
-                </a>
-                <a href="#" className="nav-item">
+                </NavLink>
+                
+                <NavLink to="/messages" className="nav-item">
                     <FiMessageSquare className="nav-icon" /> {isOpen && <span>Messages</span>}
-                </a>
-                <a href="#" className="nav-item">
+                </NavLink>
+
+                <NavLink to="/uploadpost/" className="nav-item">
                     <FiPlusSquare className="nav-icon" /> {isOpen && <span>Create</span>}
-                </a>
-                <a href="#" className="nav-item">
+                </NavLink>
+
+                <NavLink to="/Notification" className="nav-item">
                     <FiHeart className="nav-icon" /> {isOpen && <span>Notifications</span>}
-                </a>
-                <a href="#" className="nav-item">
+                </NavLink>
+
+                <NavLink to="/profile/"className="nav-item">
                     <FiUser className="nav-icon" /> {isOpen && <span>Profile</span>}
-                </a>
+                </NavLink>
             </nav>
         </aside>
     );

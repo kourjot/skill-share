@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,NavLink } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ const LoginForm = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      // Check if response is ok
+      console.log("here")
       if (!response.ok) {
         console.error("Login failed with status:", response.status);
         alert("Login failed. Please check your credentials.");
@@ -104,7 +104,11 @@ const LoginForm = () => {
         >
           Log In
         </button>
+        <NavLink to='/signin/'>
+          <h4 style={{color:"red",fontWeight:800,textAlign:"center"}}>create Account</h4>
+        </NavLink>
       </form>
+
     </div>
   );
 };
