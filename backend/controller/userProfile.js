@@ -1,5 +1,6 @@
 import { profile } from "../model/userProfile.js";
-import { user } from "../model/userModel.js";
+import { user } from "../model/userModel.js"
+import path from "path"
 import fs from "fs"
 import {v2} from "cloudinary"
 import jwt from "jsonwebtoken"
@@ -11,7 +12,7 @@ import "dotenv/config"
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
   
-  export const profileUpload = async (req, res) => {
+const profileUpload = async (req, res) => {
       const  token  = req.headers.authorization;
       if (!token) {
           return res.status(404).json({ message: "Token needed" });
@@ -19,8 +20,12 @@ import "dotenv/config"
   
       // Destructure values from the request body
       const { skills, description } = req.body;
-      const photo = req.file.path;
-  
+    //   const photo = req.file.path;
+    let photo;
+    if (req.file.path) {
+        photo = req.file.path;
+    
+    }
       try {
           const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
           const { email: userEmail, username: username } = decoded;
@@ -71,7 +76,10 @@ import "dotenv/config"
                   image: url || '',  // Default to empty if no image
               });
               await newProfile.save();
-              return res.status(201).json({ message: "Profile created successfully" });
+              console.log(newProfile)
+              return res.status(201).json({ message: "Profile created successfully" ,
+                userProfile: newProfile,
+              });
           }
   
       } catch (err) {
@@ -79,4 +87,37 @@ import "dotenv/config"
           return res.status(500).json({ message: "Internal server error" });
       }
   };
+
+const getProfile=async(req,res)=>{
+    try{
+        const  token  = req.headers.authorization;
+       
+        if (!token) {
+            return res.status(404).json({ message: "Token needed" });
+        }
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const { email: userEmail, username: username } = decoded;
+
+        // Check if the user exists in the database
+        const userExist = await user.findOne({ email: userEmail });
+        if (!userExist) {
+            return res.status(400).json({ message: "User does not exist" });
+        }
+        
+
+        const findUser=await user.findOne({ email: userEmail})
+        if(!findUser){
+            return res.status(404).json({message:"User not found"})
+        }
+        const findProfile=await profile.findOne({userId:findUser._id,username})
+        if(!findProfile){
+            return res.status(404).json({message:"Profile not found"})
+        }
+        return res.status(200).json({userProfile:findProfile})
+    }catch(err){
+        console.error("Error:", err);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
   
+export { profileUpload,getProfile}
