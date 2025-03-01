@@ -35,9 +35,9 @@ function PostUpload() {
 
         try {
             // Send a POST request to the backend to upload the image and description
-            const token = localStorage.getItem("token"); // Assuming you have the token stored in localStorage
+            // const token = localStorage.getItem("token"); // Assuming you have the token stored in localStorage
             const response = await axios.post(
-                "http://localhost:3110/uploadPost", // Your backend endpoint
+                "c", // Your backend endpoint
                 formData,
                 {
                     headers: {
