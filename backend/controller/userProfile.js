@@ -113,14 +113,14 @@ const profileUpload = async (req, res) => {
 
         // Check if the profile exists for the user
         const findProfile = await profile.findOne({ userId: findUser._id, username });
-        console.log(findProfile);
+        // console.log(findProfile);
         if (!findProfile) {
             console.log("User profile not found. Returning dummy data.");
 
             // Create dummy profile data
             let newData = {
                 userId: findUser._id,
-                username: findUser._id,
+                username: findUser.username,
                 skills: "",
                 description: '',
                 image: "",
