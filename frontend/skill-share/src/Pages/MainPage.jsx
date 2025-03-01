@@ -1,7 +1,8 @@
 import React from "react";
-import '../Styles/MainPage.css'
 import Aside from "@/Components/Aside";
 import NavBar from "@/Components/Navbar";
+import axios from "axios";
+
 const MainPost = ({data}) => {
     const { user, title, description, hashtag, images }=data
     const postdata=[{ user:"ritik", title:"there is am using to Capture the nature", 
@@ -26,6 +27,22 @@ const MainPost = ({data}) => {
       likes:129
       }
     ]
+    async function sendPostData(post){
+      const {user,title,description}=post
+      const token = localStorage.getItem("token");
+      console.log(user,title,description)
+        try{
+          const responce= await axios.post("",post,{
+            headers: {
+              Authorization:token
+            },
+          })
+        }
+        catch(err){
+          console.log(err.message)
+        }
+        
+    }
   return (
     <>
     <NavBar/>
@@ -52,7 +69,7 @@ const MainPost = ({data}) => {
         </div>
         <div className="post-actions">
             <span>👍 {post.likes}</span>
-            <span>💬 Comment</span>
+            <span onClick={()=>sendPostData(post)} id="comment">💬Comment</span>
             <span>🔄 Repost</span>
             <span>📤 Send</span>
         </div>

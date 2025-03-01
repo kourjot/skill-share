@@ -16,7 +16,8 @@ export default function Profile() {
     const fetchUserProfile = async () => {
       try {
         const token = localStorage.getItem("token"); // Get token from localStorage or cookies
-        const response = await axios.get("http://localhost:3110/getprofile", {
+        //console.log(token)
+        const response = await axios.get("https://skill-share-c93a.onrender.com/getprofile", {
           headers: {
             Authorization:token
           },
