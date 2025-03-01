@@ -115,10 +115,15 @@ const getProfile=async(req,res)=>{
                username: username,
                skills:  [],
                description: '',
-               image: ""
+               image: "",
+               totalFollows:0,
+               totalFollower:0,
+               follwers:"",
+               follows:""
+
            }
         //    await newData.save()
-            return res.status(404).json({message:newData})
+            return res.status(200).json({message:newData})
         }
          res.status(200).json({userProfile:findProfile})
     }catch(err){
