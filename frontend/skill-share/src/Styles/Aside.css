@@ -1,0 +1,83 @@
+/* Sidebar Container */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: white;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: width 0.3s ease-in-out;
+    margin-left: 250;
+    margin-top: 40px;
+}
+
+/* Collapsed Sidebar */
+.sidebar.closed {
+    width: 80px;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Instagram Logo */
+.logo {
+    width: 120px;
+}
+
+/* Menu Toggle Icon */
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Navigation Menu */
+.sidebar-nav {
+    margin-top: 30px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.3s;
+    border-radius: 10px;
+}
+
+.nav-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Navigation Icons */
+.nav-icon {
+    font-size: 24px;
+}
+
+/* Collapse Text When Sidebar is Closed */
+.sidebar.closed .nav-item span {
+    display: none;
+}
+
+/* Responsive: Hide Sidebar on Small Screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+    }
+    .sidebar .logo {
+        display: none;
+    }
+    .sidebar .nav-item span {
+        display: none;
+    }
+}

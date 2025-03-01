@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FiHome, FiSearch, FiPlusSquare, FiHeart, FiUser, FiMenu } from "react-icons/fi";
 import "../Styles/NavBar.css";
-
+import { NavLink } from "react-router-dom";
 function NavBar() {
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -9,7 +9,7 @@ function NavBar() {
         <nav className="navbar">
             {/* Logo */}
             <div className="nav-left">
-                <img src="/logo.png" alt="Logo" className="logo" />
+                <h2 id="logo">Skill-Share</h2>
             </div>
 
             {/* Search Bar */}
@@ -19,11 +19,13 @@ function NavBar() {
 
             {/* Navigation Icons */}
             <div className={`nav-right ${menuOpen ? "open" : ""}`}>
-                <FiHome className="nav-icon" />
+                <NavLink to='/'><FiHome className="nav-icon" /></NavLink>
+                
                 <FiSearch className="nav-icon mobile-hide" />
-                <FiPlusSquare className="nav-icon" />
+                <NavLink to="/uplodpost/"><FiPlusSquare className="nav-icon" /></NavLink>
                 <FiHeart className="nav-icon" />
-                <FiUser className="nav-icon" />
+                <NavLink to='/profile/'><FiUser className="nav-icon" /></NavLink>
+                
             </div>
 
             {/* Mobile Menu Button */}

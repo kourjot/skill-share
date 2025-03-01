@@ -1,7 +1,31 @@
-*{
-  background-color: azure;
-  
+.appContainer {
+  display: flex;
+  flex-direction: column;
 }
+.content{
+  margin-left: 150px;
+}
+@media (max-width: 1024px) {
+  .content {
+      margin-left: 190px; /* Adjust for smaller sidebar */
+  }
+}
+
+/* Mobile Screens (Sidebar Hidden) */
+@media (max-width: 768px) {
+  .content {
+      margin-left: 0px;
+      padding: 15px;
+  }
+}
+
+/* Extra Small Screens (Full-width content) */
+@media (max-width: 480px) {
+  .content {
+      margin-left: 10px;
+      padding: 10px;
+  }
+  }
 /* #root {
   max-width: 1280px;
   margin: 0 auto;
