@@ -102,23 +102,25 @@ const getProfile=async(req,res)=>{
         }
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         const { email: userEmail, username: username } = decoded;
-
         // Check if the user exists in the database
-        const userExist = await user.findOne({ email: userEmail });
-        if (!userExist) {
-            return res.status(400).json({ message: "User does not exist" });
-        }
-        
-
         const findUser=await user.findOne({ email: userEmail})
         if(!findUser){
             return res.status(404).json({message:"User not found"})
         }
         const findProfile=await profile.findOne({userId:findUser._id,username})
+        // console.log(findProfile)
         if(!findProfile){
-            return res.status(404).json({message:"Profile not found"})
+            let newData= new profile({
+               userId:userExist._id ,
+               username: username,
+               skills:  [],
+               description: '',
+               image: ""
+           })
+           await newData.save()
+            return res.status(404).json({message:newData})
         }
-        return res.status(200).json({userProfile:findProfile})
+         res.status(200).json({userProfile:findProfile})
     }catch(err){
         console.error("Error:", err);
         return res.status(500).json({ message: "Internal server error" });
