@@ -1,7 +1,13 @@
 import React from "react";
 import "../Styles/Profile.css"
+import NavBar from "./Navbar";
+import Aside from "./Aside";
+import Post from "./PostSection";
 export default function Profile() {
   return (
+    <>
+    <NavBar/>
+    <Aside/>
     <div className="profile-container">
       <div className="profile-content">
         {/* Profile Picture */}
@@ -16,7 +22,6 @@ export default function Profile() {
         <div className="profile-info">
           <div className="profile-header">
             <h2 className="username">_ritik_d</h2>
-            <button className="view-archive-btn">View Archive</button>
             <span className="settings-icon">⚙️</span>
           </div>
 
@@ -38,6 +43,8 @@ export default function Profile() {
         </div>
       </div>
     </div>
+    <Post/>
+    </>
   );
 }
 

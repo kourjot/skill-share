@@ -14,6 +14,9 @@ function UpdateProfile() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        axios.post("https://skill-share-c93a.onrender.com/profile",userProfile).then(()=>{
+            console.log("")
+        })
         console.log("Updated Profile:", userProfile);
     };
 
@@ -30,7 +33,7 @@ function UpdateProfile() {
                         type="text"
                         name="userName"
                         id="userName"
-                        placeholder="Enter User Name"
+                        placeholder="Enter Your Skills"
                         value={userProfile.userName}
                         onChange={handleChange}
                     />
