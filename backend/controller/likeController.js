@@ -33,10 +33,7 @@ const likePhoto =async(req,res)=>{
         const likedUsers = await user.find({ _id: { $in: photoExist.likeBy.filter(id=>id)} })
         .select("username userProfile")
         res.status(200).json({
-            message:isLiked?"Photo unliked":"Photo liked",
-            // likedUsers,
-            // photo:photoExist,
- 
+            message:isLiked?"Photo unliked":"Photo liked", 
         })
   
     }catch(err){
