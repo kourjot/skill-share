@@ -7,8 +7,7 @@ export const githubCallback = (req, res, next) => {
     if (err || !data) {
       return res.redirect(`${process.env.CALLBACK_URL}/login?error=Authentication failed`);
     }
-
     // Redirect user to frontend with token
-    res.redirect(`${process.env.CALLBACK_URL}/profile?token=${data.token}`);
+    res.redirect(`${process.env.CALLBACK_URL}/dashboard?token=${data.token}`);
   })(req, res, next);
 };
