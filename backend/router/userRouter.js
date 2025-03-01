@@ -1,7 +1,7 @@
 import {Router} from "express"
 import passport from "passport";
 import { githubAuth, githubCallback } from "../controller/githubAuthController.js";
-import {login,registration} from "../controller/userController.js"
+import {login,registration,allphoto} from "../controller/userController.js"
 
 import {sendRegisterOtp} from "../controller/nodemailerController.js"
 
@@ -26,6 +26,6 @@ userRouter.get("/getprofile",tokenVerify,getProfile)
 userRouter.get("/getUserProfileByName/:username",getUserProfileByName)
 userRouter.post("/uploadPost",profileMulter.single("post"),uploadImage)
 userRouter.get("/getMyPosts",tokenVerify,getAillImage)
-userRouter.post("/commentPost/:postId",tokenVerify,commentPost)
 
+userRouter.post("/commentPost/:postId",tokenVerify,commentPost)
 export {userRouter}
