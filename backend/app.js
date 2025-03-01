@@ -1,7 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import passport from "passport";
+
+import passport from "./config/passport.js"; 
 import { connection } from "./config/db.js"
+
+
 import {userRouter} from "./router/userRouter.js"
 
 import "dotenv/config"

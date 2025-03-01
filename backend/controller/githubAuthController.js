@@ -9,6 +9,6 @@ export const githubCallback = (req, res, next) => {
     }
 
     // Redirect user to frontend with token
-    res.redirect(`${process.env.CALLBACK_URL}/dashboard?token=${data.token}`);
+    res.redirect(`${process.env.CALLBACK_URL}/profile?token=${data.token}`);
   })(req, res, next);
 };
