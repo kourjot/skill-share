@@ -17,21 +17,23 @@ const profileUpload = async (req, res) => {
       if (!token) {
           return res.status(404).json({ message: "Token needed" });
       }
-  
+//   console.log(token)
       // Destructure values from the request body
       const { skills, description } = req.body;
+    //   console.log(req.body);
     //   const photo = req.file.path;
     let photo;
-    if (req.file.path) {
+    if (req.file) {
         photo = req.file.path;
     
     }
+    console.log(process.env.JWT_SECRET_KEY)
       try {
           const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-          const { email: userEmail, username: username } = decoded;
-  
+          const { email,username } = decoded;
+        // console.log(email,username)
           // Check if the user exists in the database
-          const userExist = await user.findOne({ email: userEmail });
+          const userExist = await user.findOne({ email });
           if (!userExist) {
               return res.status(400).json({ message: "User does not exist" });
           }
@@ -40,7 +42,7 @@ const profileUpload = async (req, res) => {
           const existProfile = await profile.findOne({ username: username });
   
           let url;
-          if (photo) {
+          if (req.file) {
               // Upload the new photo to Cloudinary if provided
               const uploadResponse = await v2.uploader.upload(photo);
               url = uploadResponse.secure_url;
@@ -61,10 +63,15 @@ const profileUpload = async (req, res) => {
           if (url) {
               updateFields.image = url;
           }
+
         console.log("jot")
+
+          console.log(updateFields);
+
           if (existProfile) {
               // If profile exists, update it
-              await profile.updateOne({ _id: userExist._id }, { $set: updateFields });
+            //   console.log("existProfile",existProfile)
+            await profile.findByIdAndUpdate(existProfile._id, { $set: updateFields });
               return res.status(200).json({ message: "Profile updated successfully" });
           } else {
               // If no profile exists, create a new one
@@ -76,10 +83,8 @@ const profileUpload = async (req, res) => {
                   image: url || '',  // Default to empty if no image
               });
               await newProfile.save();
-              console.log(newProfile)
-              return res.status(201).json({ message: "Profile created successfully" ,
-                userProfile: newProfile,
-              });
+            //   console.log(newProfile)
+              return res.status(201).json({ message: "Profile created successfully"});
           }
   
       } catch (err) {
