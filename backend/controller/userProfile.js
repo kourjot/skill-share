@@ -70,7 +70,7 @@ const profileUpload = async (req, res) => {
 
           if (existProfile) {
               // If profile exists, update it
-            //   console.log("existProfile",existProfile)
+              console.log("existProfile",existProfile)
             await profile.findByIdAndUpdate(existProfile._id, { $set: updateFields });
               return res.status(200).json({ message: "Profile updated successfully" });
           } else {
@@ -93,36 +93,55 @@ const profileUpload = async (req, res) => {
       }
   };
 
-const getProfile=async(req,res)=>{
-    try{
-        const  token  = req.headers.authorization;
-       
+  const getProfile = async (req, res) => {
+    try {
+        const token = req.headers.authorization;
+
         if (!token) {
             return res.status(404).json({ message: "Token needed" });
         }
+
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const { email: userEmail, username: username } = decoded;
+        const { email, username } = decoded;
 
         // Check if the user exists in the database
-        const userExist = await user.findOne({ email: userEmail });
-        if (!userExist) {
-            return res.status(400).json({ message: "User does not exist" });
+        const findUser = await user.findOne({ email });
+        if (!findUser) {
+            console.log("User not found");
+            return res.status(404).json({ message: "User not found" });
         }
-        
 
-        const findUser=await user.findOne({ email: userEmail})
-        if(!findUser){
-            return res.status(404).json({message:"User not found"})
+        // Check if the profile exists for the user
+        const findProfile = await profile.findOne({ userId: findUser._id, username });
+        console.log(findProfile);
+        if (!findProfile) {
+            console.log("User profile not found. Returning dummy data.");
+
+            // Create dummy profile data
+            let newData = {
+                userId: findUser._id,
+                username: findUser._id,
+                skills: "",
+                description: '',
+                image: "",
+                totalFollows: 0,
+                totalFollower: 0,
+                followers: [],
+                follows: []
+            };
+
+            // Optionally, save the dummy profile to the database
+            const createdProfile = await profile.create(newData);
+
+            return res.status(200).json({ userProfile: newData });
         }
-        const findProfile=await profile.findOne({userId:findUser._id,username})
-        if(!findProfile){
-            return res.status(404).json({message:"Profile not found"})
-        }
-        return res.status(200).json({userProfile:findProfile})
-    }catch(err){
+
+        // If profile exists, return it
+        return res.status(200).json({ userProfile: findProfile });
+    } catch (err) {
         console.error("Error:", err);
         return res.status(500).json({ message: "Internal server error" });
     }
-}
+};
   
 export { profileUpload,getProfile}

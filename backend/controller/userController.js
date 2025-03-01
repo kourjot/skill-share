@@ -41,7 +41,7 @@ import "dotenv/config"
 }
 
  const login=async(req,res)=>{
-    
+    console.log("login")
     const{email,password}=req.body
     // console.log(email);
     if (!email || !password) {
