@@ -22,7 +22,9 @@ export const uploadImage=async(req,res)=>{
     }
     try{
         const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
+
         const {email,username}=decoded
+        console.log(email)
         const userExist=await user.findOne({email:email})
         if(!userExist){
             return res.status(400).json({message:"user not exist"})
@@ -30,7 +32,7 @@ export const uploadImage=async(req,res)=>{
         let url=""
         if(req.file){
              let reponse=await v2.uploader.upload(photo)
-            url=response.secure_url
+            url=reponse.secure_url
              await fs.promises.unlink(photo);  // Asynchronous file deletion
         }
         let newPhoto=new Photo({
@@ -43,18 +45,22 @@ export const uploadImage=async(req,res)=>{
         })
         const photo_id=await newPhoto.save()
         const userpostExist=await Images.findOne({email:email})
+        // console.log(userpostExist)
         if(userpostExist){
             userpostExist.images.push(photo_id._id)
             await userpostExist.save()
         }else{
             const newPost=new Images({
                 userId:userExist._id,
-                images:[photo_id._id]
+                images:[photo_id._id],
+                username:username,
+                email:email
             })
         await newPost.save()
         }
         res.status(201).json({message:"post uploaded sucessfully"})
     }catch(err){
+        console.log(err)
         res.status(500).json({message:"error in uploadImage"})
     }
 }

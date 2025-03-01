@@ -6,13 +6,15 @@ const photoSchema = new Schema(
       ref: "user", 
       required: true,
     },
+    email:{
+       type:String
+    },
     description: {
       type: String,
       default: "",
     },
     photo: {
       type: String, 
-      required: true,
     },
     likeBy: [
       {
