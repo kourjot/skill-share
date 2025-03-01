@@ -85,7 +85,7 @@ export const getAillImage=async(req,res)=>{
         const {email,username}=decoded
         const data=await Images.findOne({email})
         const images=data.images
-        console.log(images.length)
+        // console.log(images.length)
         let arr=[]
         for(let i=0;i<images.length;i++){
             let dataImage=await Photo.findOne({_id:images[i]})
