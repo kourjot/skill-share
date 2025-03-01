@@ -122,5 +122,33 @@ const profileUpload = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 }
+const getUserProfileByName = async (req, res) => {
+    try {
+      const { username } = req.params; // ✅ Extract from params, not query
   
-export { profileUpload,getProfile}
+      if (!username) {
+        return res.status(400).json({ message: "Username is required" });
+      }
+  
+      const findUser = await profile.findOne({ username: { $regex: new RegExp(username, "i") } });
+  
+      if (!findUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      res.status(200).json({
+        username: findUser.username,
+        email: findUser.email,
+        skills: findUser.skills,
+        image: findUser.image || "",
+      });
+    } catch (err) {
+      console.error("Error in Get UserProfile By Name:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
+  
+
+  
+  
+export { profileUpload,getProfile,getUserProfileByName}
