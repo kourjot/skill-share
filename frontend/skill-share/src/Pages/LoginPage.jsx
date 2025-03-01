@@ -16,7 +16,7 @@ const LoginForm = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      // Check if response is ok
+      console.log("here")
       if (!response.ok) {
         console.error("Login failed with status:", response.status);
         alert("Login failed. Please check your credentials.");

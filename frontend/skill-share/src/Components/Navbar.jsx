@@ -22,7 +22,7 @@ function NavBar() {
                 <NavLink to='/'><FiHome className="nav-icon" /></NavLink>
                 
                 <FiSearch className="nav-icon mobile-hide" />
-                <NavLink to="/uplodpost/"><FiPlusSquare className="nav-icon" /></NavLink>
+                <NavLink to="/uploadpost/"><FiPlusSquare className="nav-icon" /></NavLink>
                 <FiHeart className="nav-icon" />
                 <NavLink to='/profile/'><FiUser className="nav-icon" /></NavLink>
                 
