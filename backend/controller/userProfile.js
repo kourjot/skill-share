@@ -95,53 +95,76 @@ const profileUpload = async (req, res) => {
 
   const getProfile = async (req, res) => {
     try {
-        const token = req.headers.authorization;
-
-        if (!token) {
-            return res.status(404).json({ message: "Token needed" });
-        }
-
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        const { email, username } = decoded;
-
-        // Check if the user exists in the database
-        const findUser = await user.findOne({ email });
-        if (!findUser) {
-            console.log("User not found");
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        // Check if the profile exists for the user
-        const findProfile = await profile.findOne({ userId: findUser._id, username });
-        // console.log(findProfile);
-        if (!findProfile) {
-            console.log("User profile not found. Returning dummy data.");
-
-            // Create dummy profile data
-            let newData = {
-                userId: findUser._id,
-                username: findUser.username,
-                skills: "",
-                description: '',
-                image: "",
-                totalFollows: 0,
-                totalFollower: 0,
-                followers: [],
-                follows: []
-            };
-
-            // Optionally, save the dummy profile to the database
-            const createdProfile = await profile.create(newData);
-
-            return res.status(200).json({ userProfile: newData });
-        }
-
-        // If profile exists, return it
-        return res.status(200).json({ userProfile: findProfile });
-    } catch (err) {
-        console.error("Error:", err);
-        return res.status(500).json({ message: "Internal server error" });
-    }
-};
+      const token = req.headers.authorization;
   
-export { profileUpload,getProfile}
+      if (!token) {
+        return res.status(404).json({ message: "Token needed" });
+      }
+  
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      const { email, username } = decoded;
+  
+      // Check if the user exists in the database
+      const findUser = await user.findOne({ email });
+      if (!findUser) {
+        console.log("User not found");
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      // Find the user's profile
+      const findProfile = await profile.findOne({ userId: findUser._id, username });
+      if (!findProfile) {
+        // If profile not found, return dummy data
+        return res.status(200).json({
+          userProfile: {
+            userId: findUser._id,
+            image: "",  // default empty image
+            username: username,
+            skills: "Not set",  // dummy value for skills
+            description: "No description available",  // dummy value for description
+            totalFollower: 0,
+            totalFollows: 0,
+            followers: [],
+            follows: []
+          }
+        });
+      }
+  
+      return res.status(200).json({ userProfile: findProfile });
+  
+    } catch (err) {
+      console.error("Error:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
+  
+const getUserProfileByName = async (req, res) => {
+    try {
+      const { username } = req.params; // ✅ Extract from params, not query
+  
+      if (!username) {
+        return res.status(400).json({ message: "Username is required" });
+      }
+  
+      const findUser = await profile.findOne({ username: { $regex: new RegExp(username, "i") } });
+  
+      if (!findUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      res.status(200).json({
+        username: findUser.username,
+        email: findUser.email,
+        skills: findUser.skills,
+        image: findUser.image || "",
+      });
+    } catch (err) {
+      console.error("Error in Get UserProfile By Name:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
+  
+
+  
+  
+export { profileUpload,getProfile,getUserProfileByName}
