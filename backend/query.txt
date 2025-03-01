@@ -56,3 +56,12 @@ git commit -m "Added unit and integration tests for key API endpoints"
 git commit -m "Optimized database queries and improved performance"
 
 git commit -m "Fixed security vulnerabilities and improved error handling"
+
+
+
+user photo save =
+userId ref:"user"
+username string
+image [string]
+
+allImages
