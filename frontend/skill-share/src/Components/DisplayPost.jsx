@@ -4,7 +4,7 @@ import '../Styles/DisplayPost.css';
 import axios from 'axios';
 
 function DisplayPost() {
-  const [postdata, setPostdata] = useContext(PostDataContext);
+  const [postdata] = useContext(PostDataContext);
 
   console.log('Post Data Length:', Array.isArray(postdata) ? postdata : 'Not an array');
 
@@ -34,7 +34,7 @@ function DisplayPost() {
               <div className="avatar"></div>
               <div>
                 <h2 className="username">{post.username}</h2>
-                <p className="user-role">Aspiring Full Stack Developer</p>
+                {/* <p className="user-role">Aspiring Full Stack Developer</p> */}
               </div>
             </div>
             <p className="post-title">{post.title}</p>

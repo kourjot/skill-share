@@ -31,9 +31,8 @@ const photoSchema = new Schema(
     ],
     comments: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "user", 
-        text: { type: String, required: true },
+        username:String,
+        text:String,
       },
     ],
     likes: {
