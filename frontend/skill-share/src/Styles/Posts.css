@@ -1,12 +1,12 @@
 /* Instagram-inspired Post Card CSS */
 .posts{
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
   padding: 20px;
-  gap: 2px;
+  gap:1rem;
 }
 .card {
-    width: 33%;
+    width: 100%;
     max-width: 400px;
     margin: 0 auto 20px;
     border: 1px solid #dbdbdb;
@@ -14,7 +14,12 @@
     background-color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
-  
+  .card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1; /* Ensures square images */
+    object-fit: cover;
+  }
   /* User Info Section */
   .user-info {
     display: flex;
@@ -98,6 +103,9 @@
   
   /* Responsive adjustments */
   @media screen and (max-width: 640px) {
+    .posts{
+      grid-template-columns: repeat(3,1fr);
+    }
     .card {
       border-left: none;
       border-right: none;
@@ -106,6 +114,10 @@
   }
   
   @media screen and (max-width: 480px) {
+
+    .posts{
+      grid-template-columns: repeat(3,1fr);
+    }
     .actions button {
       font-size: 22px;
       padding: 6px;

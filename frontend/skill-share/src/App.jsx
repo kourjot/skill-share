@@ -2,6 +2,9 @@ import Profile from "./Components/TopComponent";
 import Post from "./Components/PostSection";
 import {Routes,Route} from 'react-router-dom'
 import Login from "./Pages/LoginPage";
+import UpdateProfile from "./Pages/UpdateProfile";
+import PostUpload from "./Pages/UplodePost";
+import NavBar from "./Components/Navbar";
 
 function App() {
   const samplePost = {
@@ -15,10 +18,14 @@ function App() {
   };
   return ( 
     <>
-     <Profile/>
-     <Post {...samplePost} />
+     {/* <Profile/>
+     <Post {...samplePost} /> */}
+     <NavBar/>
      <Routes>
-      <Route to="/login" element={<Login/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/updateprofile/" element={<UpdateProfile/>}/>
+      <Route path="/uplodpost/" element={<PostUpload/>}/>
+
      </Routes>
     </>
    );
