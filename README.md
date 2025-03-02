@@ -1,14 +1,14 @@
-# 🤝 Skill-Share 
+# 🤝 Skill-Share
 
 ## Introduction
 
-Skill-Share is a ** Community-driven platform** designed to help users share and enhance their skills through collaboration. Users can:
+Skill-Share is a **community-driven platform** designed to help users share and enhance their skills through collaboration. Users can:
 
 - Join communities
 - Post images
 - Comment on posts
 - Like content
-- Authenticate via ** email/password **
+- Authenticate via **email/password**
 
 The platform fosters engagement by enabling users to interact with others who share similar interests.
 
@@ -102,7 +102,7 @@ npm run test
 ```bash
 cd ../frontend
 npm install
-npm start
+npm run dev
 ```
 
 ---
@@ -134,13 +134,28 @@ npm start
 
 ## 🏗️ Technology Stack
 
-- 🖥️ **Backend:** Node.js, Express.js, MongoDB, Mongoose
-- 🔐 **Authentication:**  JWT
-- 📤 **File Uploads:** Multer, Cloudinary
-- 🛡️ **Security:** Argon2 for password hashing
-- ✉️ **Email Service:** Nodemailer
-- 🎨 **Frontend:** React, JavaScript 
-- 🚀 **Deployment:** Render (Backend), Netlify (Frontend)
+### 🖥️ **Frontend:**
+- ⚛️ React 19
+- 🎨 Chakra UI
+- 🔗 React Router v7
+- 🎭 Framer Motion
+- ⚡ Vite
+
+### ⚙️ **Backend:**
+- 🚀 Node.js & Express.js
+- 📦 MongoDB & Mongoose
+
+### 🔐 **Authentication & Security:**
+- 🔑 JWT for secure authentication
+- 🛡️ Argon2 for password hashing
+
+### 📤 **File Uploads & Email Service:**
+- 🌩️ Cloudinary for image storage
+- ✉️ Nodemailer for email notifications
+
+### 🚀 **Deployment:**
+- 🌍 Backend: Render
+- 💻 Frontend: Netlify
 
 ---
 
@@ -149,6 +164,7 @@ npm start
 - 📢 Implement real-time notifications for comments and likes.
 - 🔍 Add a search feature to find specific communities and users.
 - 🎨 Improve UI/UX for better user engagement.
+- 📱 Mobile responsiveness improvements.
 
 ---
 
