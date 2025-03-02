@@ -14,6 +14,7 @@ import { AdBanner,MainPost} from "./Pages/MainPage";
 import LikePage from "./Pages/LikePage";
 import Comment from "./Components/Comment";
 import CommunityInputComponent from "./Components/Community";
+import { CommunityPage } from "./Pages/CommunityPage";
 function App() {
   const isAuthenticated = true; // Replace with actual authentication logic
 
@@ -32,7 +33,7 @@ function App() {
         <Route path="/updateprofile/" element={<UpdateProfile />} />
         <Route path="/uploadpost/" element={<PostUpload />} />
         <Route path="/likedpost/" element={<LikePage/>} />
-
+        <Route path="/communitys" element={<CommunityPage/>}/>
       </Routes>
     </>
   );

@@ -25,15 +25,15 @@ function Aside(props) {
                 </NavLink>
                 
                 <NavLink to="/messages" className="nav-item">
-                    <FiMessageSquare className="nav-icon" /> {isOpen && <span>Messages</span>}
+                    <FiMessageSquare className="nav-icon" /> {isOpen && <span>Communities</span>}
                 </NavLink>
 
                 <NavLink to="/uploadpost/" className="nav-item">
                     <FiPlusSquare className="nav-icon" /> {isOpen && <span>Post</span>}
                 </NavLink>
 
-                <NavLink>
-                <FiPlusSquare className="nav-icon" onClick={()=>(setCommunity(!isCommunity))}/> {isOpen && <span>Community</span>}
+                <NavLink className="nav-item">
+                <FiPlusSquare className="nav-icon" onClick={()=>(setCommunity(!isCommunity))}/> {isOpen && <span>Create Community</span>}
                 </NavLink>
 
                 <NavLink to="/profile/"className="nav-item">
