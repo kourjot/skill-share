@@ -1,6 +1,8 @@
 # Skill-Share
+<img src="https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png" 
+     alt="Rounded Image" 
+     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid red;">
 
-<img src="https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png" alt="Rounded Image" style="width: 150px; height: 150px; border-radius: 100%; object-fit: cover border:5px solid red;">
 
 
 
