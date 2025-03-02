@@ -1,4 +1,4 @@
-# Skill-Share
+# 🌟 Skill-Share
 
 ## Introduction
 
