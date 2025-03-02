@@ -157,9 +157,12 @@ const ChatPage = () => {
                                             key={index} 
                                             className={`message ${msg.username === 'me' ? 'sent' : 'received'}`}
                                         >
+                                            <div className='userimage'>
+                                                {msg.image && <img src={msg.image} alt="Attachment" className="message-image" />}
+                                            </div>
                                             <p><strong>{msg.username}</strong></p>
                                             <p>{msg.messages}</p>
-                                            {msg.image && <img src={msg.image} alt="Attachment" className="message-image" />}
+                                            
                                         </div>
                                     ))
                                 ) : (
