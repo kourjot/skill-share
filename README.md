@@ -8,11 +8,11 @@ Skill-Share is a community-driven platform designed to help users share and enha
 
 1. User Authentication
 
-Secure registration and login using email/password.
+-Secure registration and login using email/password.
 
-GitHub authentication via OAuth.
+-GitHub authentication via OAuth.
 
-Token-based authentication for secure API access.
+-Token-based authentication for secure API access.
 
 2. Profile Management
 
