@@ -72,14 +72,19 @@ export const joinCommunity = async (req, res) => {
 
         // Use findOne instead of find to get a single community
         const communityExist = await community.findOne({ name: name });
-        // console.log(communityExist);
-        const userExists = await community.findOne({name:name},{ members: { $elemMatch: { username: username } } });
-        if(userExists){
-            return res.status(400).json({message:"user already joined"})
-        }
         if (!communityExist) {
             return res.status(400).json({ message: 'no community exists' });
         }
+        // console.log(communityExist);
+        const userExists = await community.findOne({
+            name: name,
+            "members.username": username
+        });
+        console.log(userExists)
+        if(userExists){
+            return res.status(400).json({message:"user already joined"})
+        }
+        
 
         // Ensure members is initialized as an array if it's undefined
         if (!communityExist.members) {
