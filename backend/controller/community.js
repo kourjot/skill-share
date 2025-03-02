@@ -47,7 +47,7 @@ export const makeCommunity=async(req,res)=>{
 
 export const showAllCommunity=async(req,res)=>{
     try{
-        const allCommunity = await community.find({}, { name: 1, _id: 0 })
+        const allCommunity = await community.find({}, { name: 1, _id: 1 })
         res.status(200).json({data:allCommunity})
     }catch(err){
         res.status(500).json({messgae:"error in get all community"})
@@ -72,14 +72,19 @@ export const joinCommunity = async (req, res) => {
 
         // Use findOne instead of find to get a single community
         const communityExist = await community.findOne({ name: name });
-        // console.log(communityExist);
-        const userExists = await community.findOne({name:name},{ members: { $elemMatch: { username: username } } });
-        if(userExists){
-            return res.status(400).json({message:"user already joined"})
-        }
         if (!communityExist) {
             return res.status(400).json({ message: 'no community exists' });
         }
+        // console.log(communityExist);
+        const userExists = await community.findOne({
+            name: name,
+            "members.username": username
+        });
+        // console.log(userExists)
+        if(userExists){
+            return res.status(400).json({message:"user already joined"})
+        }
+        
 
         // Ensure members is initialized as an array if it's undefined
         if (!communityExist.members) {
@@ -111,37 +116,100 @@ export const joinCommunity = async (req, res) => {
     }
 };
 
-
-export const commMessage=async(req,res)=>{
-    const token=req.headers.authorization
-    if(!token){
-        return req.status(404).json({message:"token needed"})
+export const commMessage = async (req, res) => {
+    const token = req.headers.authorization;
+    if (!token) {
+        return res.status(404).json({ message: "Token needed" });
     }
-    const {communityId,message}=req.body
-    try{
-        const decoded=jwt.verify(token, process.env.JWT_SECRET_KEY)
-        if(!decoded){
-            return res.status(404).json({message:"token not valid"})
+
+    const { name, message } = req.body;
+    try {
+        // Decode the JWT token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+        // If token is invalid, return error
+        if (!decoded) {
+            return res.status(404).json({ message: "Token not valid" });
         }
-        const {username,email}=decoded
-        const communityExist=await community.findOne({_id:communityId})
-        if(!communityExist){
-            return res.status(400).json({message:"community not exist"})
+
+        const { username, email } = decoded;
+        // console.log(username);
+
+        // Find the community by name
+        const communityExist = await community.findOne({ name: name });
+        if (!communityExist) {
+            return res.status(400).json({ message: "Community does not exist" });
         }
-        const photoExist=await profile.findOne({username:username})
-        let image=""
-        if(photoExist&&photoExist.image!=""){
-            image=photoExist.image
+
+        // Check if the user has already joined the community by verifying if their username is in the messages array
+        const validUser = communityExist.members.find(member => member.username === username);
+        if (!validUser) {
+            return res.status(404).json({ message: "First need to join the community" });
         }
-        const newMessage={
+
+        // Fetch the user's profile picture
+        const photoExist = await profile.findOne({ username: username });
+        let image = "";
+        if (photoExist && photoExist.image !== "") {
+            image = photoExist.image;
+        }
+
+        // Prepare the new message object
+        const newMessage = {
             image,
             username,
-            message
-        }
-        communityExist.messages.push(newMessage)
-        await communityExist.save()
-        res.status(200).json({message:"sent sucessfully"})
-    }catch(err){
-        return res.status(500).json({message:"error in community message"})
+            messages: message
+        };
+
+        // Push the new message to the community's messages array
+        communityExist.messages.push(newMessage);
+        await communityExist.save();
+
+        // Return a success message
+        res.status(200).json({ message: "Message sent successfully" });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Error in sending community message" });
     }
-}
+};
+
+export const getMessage = async (req, res) => {
+    const token = req.headers.authorization;
+
+    if (!token) {
+        return res.status(404).json({ message: "Token needed" });
+    }
+
+    const { name } = req.params;  // Assuming the community name is passed in the params
+
+    try {
+        // Verify the token and get user info
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const { username } = decoded;
+
+        // Check if the user is part of the community
+        const communityExist = await community.findOne({ name: name });
+
+        if (!communityExist) {
+            return res.status(400).json({ message: "Community does not exist" });
+        }
+
+        // Check if the user has already joined the community
+        const validUser = communityExist.members.find(member => member.username === username);
+
+        if (!validUser) {
+            return res.status(400).json({ message: "Please join the community first" });
+        }
+
+        // If user is a member, send back the messages
+        return res.status(200).json({
+            message: "Messages fetched successfully",
+            messages: communityExist.messages
+        });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Error in getting messages" });
+    }
+};
