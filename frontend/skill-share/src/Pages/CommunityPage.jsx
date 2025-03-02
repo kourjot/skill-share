@@ -28,21 +28,40 @@ const CommunityPage = () => {
     useEffect(()=>{
       getCommunity()
     },[])
-    // async function sendPostData(post){
-    //   const {user,title,description}=post
-    //   const token = localStorage.getItem("token");
-    //     try{
-    //       const responce= await axios.post("",post,{
-    //         headers: {
-    //           Authorization:token
-    //         },
-    //       })
-    //     }
-    //     catch(err){
-    //       console.log(err.message)
-    //     }
+
+    async function joinCommunity(name) {
+        const token = localStorage.getItem("token");
         
-    // }
+        if (!token) {
+            console.error("No token found. User might not be authenticated.");
+            return;
+        }
+    
+        try {
+            console.log("Sending community name:", name);
+            
+            const response = await axios.post(
+                "https://skill-share-c93a.onrender.com/joinCommunity",
+                { name }, // Ensure the payload matches the expected format
+                {
+                    headers: {
+                        Authorization: token,
+                        "Content-Type": "application/json"
+                    },
+                }
+            );
+    
+            if (response.status >= 200 && response.status < 300) {
+                console.log("Successfully joined the community:", response.data);
+                alert("join SUcess")
+            } else {
+                console.error("Failed to join the community. Status:", response.status);
+            }
+        } catch (err) {
+            console.error("Error joining community:", err.response?.data?.message || err.message);
+        }
+    }
+    
   return (
     <>
     <NavBar/>
@@ -62,7 +81,7 @@ const CommunityPage = () => {
             <h2 className="username">{communit.name}</h2>
             </div>
         </div>
-        <button className="join-btn">Join</button>
+        <button className="join-btn" onClick={()=>{joinCommunity(communit.name)}}>Join</button>
         <button className="message-btn">Message</button>
         </div>
           </>
