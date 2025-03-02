@@ -55,7 +55,7 @@ export const showAllCommunity=async(req,res)=>{
 }
 export const joinCommunity = async (req, res) => {
     const token = req.headers.authorization;
-    const { name } = req.params;
+    const { name } = req.body;
     // console.log(name);
 
     if (!token) {
