@@ -80,7 +80,7 @@ export const joinCommunity = async (req, res) => {
             name: name,
             "members.username": username
         });
-        console.log(userExists)
+        // console.log(userExists)
         if(userExists){
             return res.status(400).json({message:"user already joined"})
         }
