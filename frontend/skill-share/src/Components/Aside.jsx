@@ -22,7 +22,7 @@ function Aside(props) {
                     <FiHome className="nav-icon" /> {isOpen && <span>Home</span>}
                 </NavLink>
                 
-                <NavLink to="/" className="nav-item">
+                <NavLink to="https://tenantlandlordchat.onrender.com/" className="nav-item">
                     <HiUserGroup className="nav-icon" /> {isOpen && <span>Community App</span>}
                 </NavLink>
                 
