@@ -94,6 +94,7 @@
 }
 
 .message {
+    margin-top:4px ;
     max-width: 70%;
     padding: 12px 16px;
     margin: 8px 0;
@@ -128,9 +129,13 @@
 }
 
 .message-image {
-    max-width: 100%;
+    max-width: 40px;
+    max-height: 40px;
     border-radius: 8px;
     margin-top: 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0px;
 }
 
 .message-input {
