@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-
-const Comment= ({id}) => {
+import axios from 'axios'; 
+import { FiX } from "react-icons/fi";
+import '../Styles/Comment.css'
+const Comment= (props) => {
   const [comments, setComments] = useState([]);
   const [input, setInput] = useState('');
-
+  const {id,postcomments,setComment,isComment}=props
+  //console.log(id,postcomments,props)
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
@@ -14,8 +17,9 @@ const Comment= ({id}) => {
       const newComment = { comment: input.trim() };
 
       try {
+        console.log("Sending Comment....",token,id,newComment)
         const response = await axios.post(
-          `https://skill-share-c93a.onrender.com/posts/${id}/comments`,
+          `https://skill-share-c93a.onrender.com/commentPost/${id}`,
           newComment,
           {
             headers: {
@@ -36,26 +40,25 @@ const Comment= ({id}) => {
   };
 
   return (
-    <div style={{ maxWidth: '500px', margin: '0 auto', 
-            padding: '20px', 
-            border: '1px solid #ddd', 
-            borderRadius: '8px',
-            marginTop:'50px' 
-        }}>
+    <div className='Comment-container'>
       <h2 style={{ marginBottom: '10px' }}>Comments</h2>
-      <div style={{ marginBottom: '15px' }}>
+      <FiX className='close-button' size={24} color="black" onClick={()=>setComment(!isComment)} />
+      <ul className='PrevComment' style={{ listStyleType: 'none', padding: 0 }}>
+        {postcomments.map((comment, index) => (
+          <li
+            key={index}
+            
+          >
+            {comment.username}--{comment.text}
+          </li>
+        ))}
+      </ul>
+      <div className='Comment-input-box' >
         <input
           type="text"
           value={input}
           onChange={handleInputChange}
           placeholder="Add a comment..."
-          style={{
-            width: '100%',
-            padding: '8px',
-            border: '1px solid #ccc',
-            borderRadius: '4px',
-            marginBottom: '10px',
-          }}
         />
         <button
           onClick={handleAddComment}
@@ -68,25 +71,10 @@ const Comment= ({id}) => {
             cursor: 'pointer',
           }}
         >
-          Add Comment
+          Send
         </button>
       </div>
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
-        {comments.map((comment, index) => (
-          <li
-            key={index}
-            style={{
-              padding: '10px',
-              borderBottom: '1px solid #eee',
-              backgroundColor: '#f9f9f9',
-              borderRadius: '4px',
-              marginBottom: '8px',
-            }}
-          >
-            {comment}
-          </li>
-        ))}
-      </ul>
+      
     </div>
   );
 };

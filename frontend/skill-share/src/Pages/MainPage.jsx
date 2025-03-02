@@ -8,6 +8,7 @@ const MainPost = () => {
     const [Postdata,setPostdata]=useState([])
     const [isComment,setComment]=useState(false)
     const [selectedPostId, setSelectedPostId] = useState(null);
+    const [postcomments,setComments]=useState(null)
     async function getposts(){
       try{
         const token = localStorage.getItem("token");
@@ -25,7 +26,6 @@ const MainPost = () => {
     async function sendPostData(post){
       const {user,title,description}=post
       const token = localStorage.getItem("token");
-      console.log(user,title,description)
         try{
           const responce= await axios.post("",post,{
             headers: {
@@ -38,15 +38,16 @@ const MainPost = () => {
         }
         
     }
-    function handleComment(id) {
+    function handleComment(id,postcomments) {
       setComment(!isComment);
       setSelectedPostId(id);
+      setComments(postcomments)
   }
   return (
     <>
     <NavBar/>
     <Aside/>
-    {isComment && <Comment id={selectedPostId} />}
+    {isComment && <Comment id={selectedPostId} postcomments={postcomments} setComment={setComment} isComment={isComment}/>}
     <div className="postcontainer">
       {Postdata.map((post)=>{
         return(
@@ -71,7 +72,7 @@ const MainPost = () => {
         </div>
         <div className="post-actions">
             <span>👍 {post.likes}</span>
-            <span onClick={() => handleComment(post._id)} id="comment">💬Comment</span>
+            <span onClick={() => handleComment(post._id,post.comments)} id="comment">💬Comment</span>
             
             <span>🔄 Repost</span>
             <span>📤 Send</span>
