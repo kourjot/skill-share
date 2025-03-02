@@ -87,6 +87,10 @@
   .post-description {
     color: gray;
     font-size: 14px;
+    max-height:50px;
+    min-height: 50px;
+    overflow-y: scroll;
+    scrollbar-width: none; 
   }
   
   .post-hashtag {

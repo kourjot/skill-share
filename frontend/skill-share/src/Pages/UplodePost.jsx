@@ -3,7 +3,9 @@ import "../Styles/PostUpload.css";
 import axios from "axios";
 import NavBar from "@/Components/Navbar";
 import Aside from "@/Components/Aside";
+import { useNavigate } from "react-router-dom";
 function PostUpload() {
+    const navigate=useNavigate()
     const [post, setPost] = useState({
         image: null,
         description: "", // Updated to match backend
@@ -48,7 +50,8 @@ function PostUpload() {
                 }
             );
             alert(response.data.message); // Display the success message from the backend
-            // window.reload()
+            //window.reload()
+            navigate("/home");
         } catch (error) {
             console.error("Error uploading post:", error);
             alert("Error uploading post. Please try again.");

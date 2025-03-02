@@ -47,7 +47,8 @@ const MainPost = () => {
     <>
     <NavBar/>
     <Aside/>
-    {isComment && <Comment id={selectedPostId} postcomments={postcomments} setComment={setComment} isComment={isComment}/>}
+    {isComment && <Comment id={selectedPostId} 
+     setComment={setComment} isComment={isComment}/>}
     <div className="postcontainer">
       {Postdata.map((post)=>{
         return(
@@ -72,7 +73,7 @@ const MainPost = () => {
         </div>
         <div className="post-actions">
             <span>👍 {post.likes}</span>
-            <span onClick={() => handleComment(post._id,post.comments)} id="comment">💬Comment</span>
+            <span onClick={() => handleComment(post._id)} id="comment">💬Comment</span>
             
             <span>🔄 Repost</span>
             <span>📤 Send</span>

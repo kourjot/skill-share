@@ -39,8 +39,15 @@
     align-items: center;
     justify-content: center;
     font-size: 24px;
+    overflow: hidden;
+    position: relative;
 }
-
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
 /* Input Fields */
 .profile-card input,
 .profile-card textarea {
