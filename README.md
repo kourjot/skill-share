@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Skill-Share is a **community-driven platform** designed to help users share and enhance their skills through collaboration. Users can:
+Skill-Share is a ** Community-driven platform** designed to help users share and enhance their skills through collaboration. Users can:
 
 - Join communities
 - Post images
