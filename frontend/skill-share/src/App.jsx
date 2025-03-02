@@ -13,6 +13,7 @@ import Home from "./Pages/HomePage";
 import { AdBanner,MainPost} from "./Pages/MainPage";
 import LikePage from "./Pages/LikePage";
 import Comment from "./Components/Comment";
+
 function App() {
   const isAuthenticated = true; // Replace with actual authentication logic
 

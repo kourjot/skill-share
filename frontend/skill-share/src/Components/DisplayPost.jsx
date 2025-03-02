@@ -2,10 +2,8 @@ import { useContext } from 'react';
 import { PostDataContext } from '@/ContextApi/PostData';
 import '../Styles/DisplayPost.css';
 import axios from 'axios';
-
 function DisplayPost() {
   const [postdata] = useContext(PostDataContext);
-
   console.log('Post Data Length:', Array.isArray(postdata) ? postdata : 'Not an array');
 
   async function sendPostData(id){

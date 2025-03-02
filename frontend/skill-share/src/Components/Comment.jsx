@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios'; 
 import { FiX } from "react-icons/fi";
 import '../Styles/Comment.css'
+import { useNavigate } from 'react-router-dom';
 const Comment= (props) => {
-  const [comments, setComments] = useState([]);
+  const navigate=useNavigate()
+  // const [comments, setComments] = useState([]);
   const [input, setInput] = useState('');
   const {id,postcomments,setComment,isComment}=props
   //console.log(id,postcomments,props)
@@ -20,18 +22,22 @@ const Comment= (props) => {
         console.log("Sending Comment....",token,id,newComment)
         const response = await axios.post(
           `https://skill-share-c93a.onrender.com/commentPost/${id}`,
-          { text: input.trim() },
+          { text: input.trim()},
           {
             headers: {
               Authorization: token,
               'Content-Type': 'application/json',
             },
           }
+        
         );
 
-        if (response.status === 200) {
-          setComments([...comments, response.data.comment]);
+        if (response.status <=300) {
           setInput('');
+          navigate("/home")
+        }
+        else{
+          console.log(response.status)
         }
       } catch (err) {
         console.error('Error posting comment:', err.message);

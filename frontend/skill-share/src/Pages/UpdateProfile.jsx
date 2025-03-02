@@ -3,12 +3,15 @@ import "../Styles/UpdateProfile.css";
 import axios from "axios"; // Ensure axios is imported
 import Aside from "@/Components/Aside";
 import NavBar from "@/Components/Navbar";
+import { useNavigate } from "react-router-dom";
+import { img } from "framer-motion/client";
 function UpdateProfile() {
+    const navigate=useNavigate()
     const [userProfile, setUserProfile] = useState({
         skills: "",
         userBio: "",
     });
-
+    const profileImage=localStorage.getItem("ProfilePhoto")
     const [image, setImage] = useState(null); // Add state to store selected image
 
     const handleChange = (e) => {
@@ -18,6 +21,7 @@ function UpdateProfile() {
 
     const handleImageChange = (e) => {
         setImage(e.target.files[0]); // Store the selected image file
+        console.log(image)
     };
 
     const handleSubmit = async (e) => {
@@ -47,6 +51,7 @@ function UpdateProfile() {
 
             console.log("Profile updated successfully:", response.data);
             alert("Profile updated successfully!");
+            navigate("/profile/")
         } catch (error) {
             console.error("Error updating profile:", error);
             alert("Failed to update profile.");
@@ -62,7 +67,12 @@ function UpdateProfile() {
                 <h2>Edit Profile</h2>
 
                 {/* Profile Image Placeholder */}
-                <div className="profile-image">📷</div>
+                <div className="profile-image">
+                    {image ?
+                    <img src={URL.createObjectURL(image)} alt="" />:
+                    <img src={profileImage}/>
+                    }
+                </div>
 
                 <form onSubmit={handleSubmit}>
                     <input

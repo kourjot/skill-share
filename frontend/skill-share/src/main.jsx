@@ -13,5 +13,6 @@ createRoot(document.getElementById("root")).render(
       <App />
     </PostDataContextProvider>
     </ChakraProvider>
+    
   </BrowserRouter>
 );

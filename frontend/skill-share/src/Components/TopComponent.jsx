@@ -7,6 +7,7 @@ import Post from "./PostSection";
 import { NavLink } from "react-router-dom";
 import DisplayPost from "./DisplayPost";
 
+
 export default function Profile() {
   const [userProfile, setUserProfile] = useState(null); // State to store profile data
   const [loading, setLoading] = useState(true); // State to handle loading
@@ -24,6 +25,7 @@ export default function Profile() {
         });
         setUserProfile(response.data.userProfile); // Set the response data into state
         console.log(response.data)
+        localStorage.setItem("ProfilePhoto",response.data.userProfile.image)
         setLoading(false); // Stop loading once data is fetched
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -66,7 +68,7 @@ export default function Profile() {
           <div className="profile-info">
             <div className="profile-header">
               <h2 className="username">{userProfile.username}</h2>
-              <span className="settings-icon">⚙️</span>
+              
             </div>
 
             {/* Stats */}

@@ -2,7 +2,6 @@ import { Children, createContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const PostDataContext=createContext()
-
 export const PostDataContextProvider=({children})=>{
 
     const [postdata,setPostdata]=useState([])
@@ -33,3 +32,4 @@ export const PostDataContextProvider=({children})=>{
         </PostDataContext.Provider>
     )
 }
+
