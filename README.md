@@ -1,26 +1,11 @@
 # Skill-Share
+<img src="https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png" 
+     alt="Rounded Image" 
+     style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid red;">
 
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 20px;
-  }
-  h1, h2, h3 {
-    color: #0056b3;
-  }
-  ul {
-    list-style-type: square;
-  }
-  code {
-    background-color: #eaeaea;
-    padding: 3px;
-    border-radius: 5px;
-  }
-</style>
 
-![Skill-Share Logo](./path-to-logo.png)
+
+
 
 ## Introduction
 
@@ -102,10 +87,20 @@ SKILL-SHARE/
 
 ## 🛠️ Installation & Getting Started
 
+### Installation Prerequisites
+
+Ensure you have the following installed on your system:
+
+- **Node.js** (v18 or later) - [Download](https://nodejs.org/)
+- **MongoDB** (latest version) - [Download](https://www.mongodb.com/try/download/community)
+- **Git** - [Download](https://git-scm.com/downloads)
+- **npm** or **yarn** (comes with Node.js)
+
 ### Backend Setup
 
 ```bash
-cd backend
+git clone https://github.com/kourjot/skill-share.git
+cd skill-share/backend
 npm install
 npm start
 ```
@@ -113,7 +108,7 @@ npm start
 ### Frontend Setup
 
 ```bash
-cd frontend
+cd ../frontend
 npm install
 npm start
 ```
@@ -174,5 +169,4 @@ Contributions are welcome! Feel free to fork the repository and submit pull requ
 ## 📜 License
 
 This project is licensed under the ISC License.
-
 
