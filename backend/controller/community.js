@@ -73,7 +73,7 @@ export const joinCommunity = async (req, res) => {
         // Use findOne instead of find to get a single community
         const communityExist = await community.findOne({ name: name });
         // console.log(communityExist);
-        const userExists = await community.findOne({ members: { $elemMatch: { username: username } } });
+        const userExists = await community.findOne({name:name},{ members: { $elemMatch: { username: username } } });
         if(userExists){
             return res.status(400).json({message:"user already joined"})
         }
@@ -110,3 +110,38 @@ export const joinCommunity = async (req, res) => {
         res.status(500).json({ message: 'error in join community' });
     }
 };
+
+
+export const commMessage=async(req,res)=>{
+    const token=req.headers.authorization
+    if(!token){
+        return req.status(404).json({message:"token needed"})
+    }
+    const {communityId,message}=req.body
+    try{
+        const decoded=jwt.verify(token, process.env.JWT_SECRET_KEY)
+        if(!decoded){
+            return res.status(404).json({message:"token not valid"})
+        }
+        const {username,email}=decoded
+        const communityExist=await community.findOne({_id:communityId})
+        if(!communityExist){
+            return res.status(400).json({message:"community not exist"})
+        }
+        const photoExist=await profile.findOne({username:username})
+        let image=""
+        if(photoExist&&photoExist.image!=""){
+            image=photoExist.image
+        }
+        const newMessage={
+            image,
+            username,
+            message
+        }
+        communityExist.messages.push(newMessage)
+        await communityExist.save()
+        res.status(200).json({message:"sent sucessfully"})
+    }catch(err){
+        return res.status(500).json({message:"error in community message"})
+    }
+}

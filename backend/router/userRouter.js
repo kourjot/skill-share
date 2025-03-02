@@ -35,5 +35,5 @@ userRouter.get("/getAllComments/:postId",getAllComments)
 userRouter.post("/likePhoto/:postId",tokenVerify,likePhoto)
 userRouter.post("/makeCommunity",makeCommunity)
 userRouter.get("/getCommunity",showAllCommunity)
-userRouter.post("/joinCommunity/:name",joinCommunity)
+userRouter.post("/joinCommunity",joinCommunity)
 export {userRouter}

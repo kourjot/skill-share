@@ -8,7 +8,7 @@ Skill-Share is a **community-driven platform** designed to help users share and 
 - Post images
 - Comment on posts
 - Like content
-- Authenticate via **GitHub or email/password**
+- Authenticate via ** email/password **
 
 The platform fosters engagement by enabling users to interact with others who share similar interests.
 
@@ -19,7 +19,6 @@ The platform fosters engagement by enabling users to interact with others who sh
 ### 1. **User Authentication**
 
 - 🔒 Secure registration and login using **email/password**.
-- 🔗 GitHub authentication via **OAuth**.
 - 🛡️ Token-based authentication for secure API access.
 
 ### 2. **Profile Management**
@@ -65,10 +64,10 @@ The platform fosters engagement by enabling users to interact with others who sh
 SKILL-SHARE/
 ├─ backend/
 │  ├─ app.js
-│  ├─ controllers/
+│  ├─ controller/
 │  ├─ middleware/
-│  ├─ models/
-│  ├─ routes/
+│  ├─ model/
+│  ├─ router/
 │  ├─ config/
 ├─ frontend/
 │  ├─ src/
@@ -95,7 +94,7 @@ Ensure you have the following installed on your system:
 git clone https://github.com/kourjot/skill-share.git
 cd skill-share/backend
 npm install
-npm start
+npm run test
 ```
 
 ### Frontend Setup
@@ -136,7 +135,7 @@ npm start
 ## 🏗️ Technology Stack
 
 - 🖥️ **Backend:** Node.js, Express.js, MongoDB, Mongoose
-- 🔐 **Authentication:** Passport.js, JWT, OAuth (GitHub)
+- 🔐 **Authentication:**  JWT
 - 📤 **File Uploads:** Multer, Cloudinary
 - 🛡️ **Security:** Argon2 for password hashing
 - ✉️ **Email Service:** Nodemailer

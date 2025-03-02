@@ -2,9 +2,11 @@ import { useState } from "react";
 import { FiHome, FiSearch, FiMessageSquare, FiPlusSquare, FiHeart, FiUser, FiMenu } from "react-icons/fi";
 import "../Styles/Aside.css";
 import { NavLink } from "react-router-dom";
+
 function Aside(props) {
     const [isOpen, setIsOpen] = useState(true);
-    const {setCommunity,isCommunity}=props
+    const {setCommunity, isCommunity} = props;
+    
     return (
         <aside className={`sidebar ${isOpen ? "open" : "closed"}`}>
             {/* Logo and Menu Toggle */}
@@ -15,12 +17,11 @@ function Aside(props) {
 
             {/* Navigation Links */}
             <nav className="sidebar-nav">
-                
-                <NavLink to='/home'  className="nav-item">   
+                <NavLink to='/home' className="nav-item">   
                     <FiHome className="nav-icon" /> {isOpen && <span>Home</span>}
                 </NavLink>
-                <NavLink to="/" className="nav-item">
                 
+                <NavLink to="/" className="nav-item">
                     <FiSearch className="nav-icon" /> {isOpen && <span>Search</span>}
                 </NavLink>
                 
@@ -32,11 +33,18 @@ function Aside(props) {
                     <FiPlusSquare className="nav-icon" /> {isOpen && <span>Post</span>}
                 </NavLink>
 
+<<<<<<< HEAD
+                {/* Fixed Community Link */}
+                <div className="nav-item" onClick={() => setCommunity(!isCommunity)}>
+                    <FiPlusSquare className="nav-icon" /> {isOpen && <span>Community</span>}
+                </div>
+=======
                 <NavLink className="nav-item">
                 <FiPlusSquare className="nav-icon" onClick={()=>(setCommunity(!isCommunity))}/> {isOpen && <span>Create Community</span>}
                 </NavLink>
+>>>>>>> f96611187773681fd8b9a5cad14b89393ab49e51
 
-                <NavLink to="/profile/"className="nav-item">
+                <NavLink to="/profile/" className="nav-item">
                     <FiUser className="nav-icon" /> {isOpen && <span>Profile</span>}
                 </NavLink>
             </nav>
