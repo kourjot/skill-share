@@ -1,10 +1,8 @@
 # Skill-Share
 
-
-<p align="center">
+<p class="flex justify-center">
   <img src="https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png" 
-       alt="Skill-Share Logo" width="150" height="150" 
-       style="border-radius: 50%; object-fit: cover;">
+       alt="Skill-Share Logo" class="w-32 h-32 rounded-full object-cover">
 </p>
 
 
