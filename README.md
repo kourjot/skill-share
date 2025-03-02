@@ -164,6 +164,8 @@ npm run dev
 - ✉️ Nodemailer for email notifications
 
 ### 🚀 **Deployment:**
+
+
 - 🌍 Backend: Render
 - 💻 Frontend: Netlify
 
