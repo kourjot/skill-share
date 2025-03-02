@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import Aside from "@/Components/Aside";
 import NavBar from "@/Components/Navbar";
 import axios from "axios";
+import Comment from "@/Components/Comment";
 
 const MainPost = () => {
     const [Postdata,setPostdata]=useState([])
-    
+    const [isComment,setComment]=useState(false)
+    const [selectedPostId, setSelectedPostId] = useState(null);
     async function getposts(){
       try{
         const token = localStorage.getItem("token");
@@ -36,10 +38,15 @@ const MainPost = () => {
         }
         
     }
+    function handleComment(id) {
+      setComment(!isComment);
+      setSelectedPostId(id);
+  }
   return (
     <>
     <NavBar/>
     <Aside/>
+    {isComment && <Comment id={selectedPostId} />}
     <div className="postcontainer">
       {Postdata.map((post)=>{
         return(
@@ -64,7 +71,8 @@ const MainPost = () => {
         </div>
         <div className="post-actions">
             <span>👍 {post.likes}</span>
-            <span onClick={()=>sendPostData(post)} id="comment">💬Comment</span>
+            <span onClick={() => handleComment(post._id)} id="comment">💬Comment</span>
+            
             <span>🔄 Repost</span>
             <span>📤 Send</span>
         </div>

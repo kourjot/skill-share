@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Comment= () => {
+const Comment= ({id}) => {
   const [comments, setComments] = useState([]);
   const [input, setInput] = useState('');
 
@@ -8,10 +8,30 @@ const Comment= () => {
     setInput(e.target.value);
   };
 
-  const handleAddComment = () => {
+  const handleAddComment = async () => {
     if (input.trim()) {
-      setComments([...comments, input.trim()]);
-      setInput('');
+      const token = localStorage.getItem('token');
+      const newComment = { comment: input.trim() };
+
+      try {
+        const response = await axios.post(
+          `https://skill-share-c93a.onrender.com/posts/${id}/comments`,
+          newComment,
+          {
+            headers: {
+              Authorization: token,
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          setComments([...comments, response.data.comment]);
+          setInput('');
+        }
+      } catch (err) {
+        console.error('Error posting comment:', err.message);
+      }
     }
   };
 

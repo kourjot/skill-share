@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Comment/>
+      {/* <Comment/> */}
       <Routes>
         <Route path='/' element={<LoginForm/>}/>
         <Route path='/home' element={<MainPost/>}/>
