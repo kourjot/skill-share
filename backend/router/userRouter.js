@@ -12,6 +12,7 @@ import  {tokenVerify} from "../middleware/tokenMiddleware.js"
 import  {forgotPassword} from "../controller/forgotPasswordController.js" 
 import {resetpassword} from "../controller/resetPasswordController.js"
 import {commentPost,getAllComments} from "../controller/commentController.js"
+import {likePhoto} from "../controller/likeController.js"
 const userRouter = Router()
 
 userRouter.post("/otp-register",sendRegisterOtp)
@@ -30,4 +31,5 @@ userRouter.get("/getMyPosts",tokenVerify,getAillImage)
 userRouter.post("/commentPost/:postId",tokenVerify,commentPost)
 userRouter.get("/allPhoto",allphoto)
 userRouter.get("/getAllComments/:postId",getAllComments)
+userRouter.post("/likePhoto/:postId",tokenVerify,likePhoto)
 export {userRouter}
