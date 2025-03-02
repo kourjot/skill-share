@@ -4,8 +4,10 @@ import axios from "axios";
 import NavBar from "@/Components/Navbar";
 import Aside from "@/Components/Aside";
 import { useNavigate } from "react-router-dom";
+import CommunityInputComponent from "@/Components/Community";
 function PostUpload() {
     const navigate=useNavigate()
+    const [isCommunity,setCommunity]=useState(false)
     const [post, setPost] = useState({
         image: null,
         description: "", // Updated to match backend
@@ -61,7 +63,8 @@ function PostUpload() {
     return (
         <>
         <NavBar/>
-        <Aside/>
+        <Aside setCommunity={setCommunity} isCommunity={isCommunity}/>
+        { isCommunity && <CommunityInputComponent/>}
         <div className="post-upload-container">
             <div className="post-card">
                 <h2>Share Your Skill/Idea</h2>

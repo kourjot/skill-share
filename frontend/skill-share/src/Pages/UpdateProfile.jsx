@@ -5,8 +5,11 @@ import Aside from "@/Components/Aside";
 import NavBar from "@/Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { img } from "framer-motion/client";
+import CommunityInputComponent from "@/Components/Community";
 function UpdateProfile() {
     const navigate=useNavigate()
+    const [isCommunity,setCommunity]=useState(false)
+
     const [userProfile, setUserProfile] = useState({
         skills: "",
         userBio: "",
@@ -61,7 +64,8 @@ function UpdateProfile() {
     return (
         <>
         <NavBar/>
-        <Aside/>
+        <Aside setCommunity={setCommunity} isCommunity={isCommunity}/>
+        { isCommunity && <CommunityInputComponent/>}
         <div className="profile-container">
             <div className="profile-card">
                 <h2>Edit Profile</h2>
