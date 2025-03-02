@@ -53,6 +53,7 @@ export const uploadImage=async(req,res)=>{
             likes:0
         })
         const photo_id=await newPhoto.save()
+        
         const userpostExist=await Images.findOne({email:email})
         // console.log(userpostExist)
         if(userpostExist){

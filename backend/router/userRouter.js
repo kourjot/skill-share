@@ -6,6 +6,7 @@ import {login,registration,allphoto} from "../controller/userController.js"
 import {sendRegisterOtp} from "../controller/nodemailerController.js"
 
 import { profileMulter } from "../middleware/multer.js"
+import { makeCommunity ,showAllCommunity} from "../controller/community.js";
 import { uploadImage ,getAillImage} from "../controller/postImage.js"
 import { profileUpload,getProfile,getUserProfileByName} from "../controller/userProfile.js"
 import  {tokenVerify} from "../middleware/tokenMiddleware.js"
@@ -32,4 +33,6 @@ userRouter.post("/commentPost/:postId",tokenVerify,commentPost)
 userRouter.get("/allPhoto",allphoto)
 userRouter.get("/getAllComments/:postId",getAllComments)
 userRouter.post("/likePhoto/:postId",tokenVerify,likePhoto)
+userRouter.post("/makeCommunity",makeCommunity)
+userRouter.get("/getCommunity",showAllCommunity)
 export {userRouter}
