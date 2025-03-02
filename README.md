@@ -49,6 +49,13 @@ The platform fosters engagement by enabling users to interact with others who sh
 - 🔄 Forgot and reset password functionalities.
 
 ---
+## Deplolyed App
+Frontend:https://skill-sharev8.netlify.app/
+Backend: https://github.com/kourjot/skill-share/tree/main/backend
+Database: mongodb+srv://vijaynimar:tgqH3cZeaQLrJa7w@skillshare.cwbk2.mongodb.net/?retryWrites=true&w=majority&appName=skillshare
+---
+
+---
 
 ## 🏗️ Project Type
 
