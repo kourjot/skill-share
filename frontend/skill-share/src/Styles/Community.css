@@ -1,0 +1,84 @@
+.community-container {
+    position: absolute;
+    top:100px;
+    left:280px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 16px;
+    background-color: #fff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.community-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.community-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.community-input {
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.community-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.community-button {
+    padding: 14px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.community-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.community-button:hover:not(:disabled) {
+    background-color: #0056b3;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .community-container {
+        padding: 24px;
+        max-width: 90%;
+    }
+
+    .community-input,
+    .community-button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .community-container {
+        padding: 20px;
+    }
+
+    .community-input,
+    .community-button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

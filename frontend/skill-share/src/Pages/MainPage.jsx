@@ -3,12 +3,14 @@ import Aside from "@/Components/Aside";
 import NavBar from "@/Components/Navbar";
 import axios from "axios";
 import Comment from "@/Components/Comment";
+import CommunityInputComponent from "@/Components/Community";
 
 const MainPost = () => {
     const [Postdata,setPostdata]=useState([])
     const [isComment,setComment]=useState(false)
     const [selectedPostId, setSelectedPostId] = useState(null);
     const [postcomments,setComments]=useState(null)
+    const [isCommunity,setCommunity]=useState(false)
     async function getposts(){
       try{
         const token = localStorage.getItem("token");
@@ -46,9 +48,11 @@ const MainPost = () => {
   return (
     <>
     <NavBar/>
-    <Aside/>
-    {isComment && <Comment id={selectedPostId} 
+    <Aside setCommunity={setCommunity} isCommunity={isCommunity}/>
+    {isComment && <Comment id={selectedPostId}
      setComment={setComment} isComment={isComment}/>}
+     { isCommunity && <CommunityInputComponent/>}
+     
     <div className="postcontainer">
       {Postdata.map((post)=>{
         return(

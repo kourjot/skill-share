@@ -2,9 +2,9 @@ import { useState } from "react";
 import { FiHome, FiSearch, FiMessageSquare, FiPlusSquare, FiHeart, FiUser, FiMenu } from "react-icons/fi";
 import "../Styles/Aside.css";
 import { NavLink } from "react-router-dom";
-function Aside() {
+function Aside(props) {
     const [isOpen, setIsOpen] = useState(true);
-
+    const {setCommunity,isCommunity}=props
     return (
         <aside className={`sidebar ${isOpen ? "open" : "closed"}`}>
             {/* Logo and Menu Toggle */}
@@ -29,11 +29,11 @@ function Aside() {
                 </NavLink>
 
                 <NavLink to="/uploadpost/" className="nav-item">
-                    <FiPlusSquare className="nav-icon" /> {isOpen && <span>Create</span>}
+                    <FiPlusSquare className="nav-icon" /> {isOpen && <span>Post</span>}
                 </NavLink>
 
-                <NavLink to="/Notification" className="nav-item">
-                    <FiHeart className="nav-icon" /> {isOpen && <span>Notifications</span>}
+                <NavLink>
+                <FiPlusSquare className="nav-icon" onClick={()=>(setCommunity(!isCommunity))}/> {isOpen && <span>Community</span>}
                 </NavLink>
 
                 <NavLink to="/profile/"className="nav-item">
