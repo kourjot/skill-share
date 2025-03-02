@@ -1,14 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios'; 
 import { FiX } from "react-icons/fi";
 import '../Styles/Comment.css'
 import { useNavigate } from 'react-router-dom';
 const Comment= (props) => {
   const navigate=useNavigate()
-  // const [comments, setComments] = useState([]);
+  const [sendComment,setSendComment]=useState(true)
   const [input, setInput] = useState('');
-  const {id,postcomments,setComment,isComment}=props
+  const {id,setComment,isComment}=props
   //console.log(id,postcomments,props)
+  const [postComments,setPostComment]=useState([])
+  const getComment=async(id)=>{
+    try {
+      console.log("get Comment....")
+      const token = localStorage.getItem('token');
+      const response = await axios.get(
+        `https://skill-share-c93a.onrender.com/getAllComments/${id}`,
+        {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+        }
+      
+      );
+
+      if (response.status <=300) {
+        setInput('');
+        setPostComment(response.data.comments)
+        navigate("/home")
+      }
+      else{
+        console.log(response.status)
+      }
+    } catch (err) {
+      console.error('Error posting comment:', err.message);
+    }
+  }
+  useEffect(()=>{
+    getComment(id)
+  },[sendComment])
+///
   const handleInputChange = (e) => {
     setInput(e.target.value);
   };
@@ -34,6 +66,7 @@ const Comment= (props) => {
 
         if (response.status <=300) {
           setInput('');
+          setSendComment(!sendComment)
           navigate("/home")
         }
         else{
@@ -51,7 +84,7 @@ const Comment= (props) => {
       <h2 style={{ marginBottom: '10px' }}>Comments</h2>
     <div className='Comment-container'>
       <ul className='PrevComment' style={{ listStyleType: 'none', padding: 0 }}>
-        {postcomments.map((comment, index) => (
+        {postComments.map((comment, index) => (
           <li
             key={index}
             
