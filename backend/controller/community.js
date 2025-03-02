@@ -2,10 +2,12 @@ import { community } from "../model/community.js";
 import jwt from "jsonwebtoken"
 import { user } from "../model/userModel.js";
 import "dotenv/config"
+import { profile } from "../model/userProfile.js";
+import { getUserProfileByName } from "./userProfile.js";
 export const makeCommunity=async(req,res)=>{
     const token=req.headers.authorization
     const {name}=req.body
-    console.log(name)
+    // console.log(name)
     if(!token){
         return res.status(404).json({message:"not needed"})
     }
@@ -51,3 +53,57 @@ export const showAllCommunity=async(req,res)=>{
         res.status(500).json({messgae:"error in get all community"})
     }
 }
+export const joinCommunity = async (req, res) => {
+    const token = req.headers.authorization;
+    const { name } = req.params;
+    console.log(name);
+
+    if (!token) {
+        return res.status(404).json({ message: "token needed" });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const { email, username } = decoded;
+
+        if (!decoded) {
+            return res.status(400).json({ message: "token not valid" });
+        }
+
+        // Use findOne instead of find to get a single community
+        const communityExist = await community.findOne({ name: name });
+        console.log(communityExist);
+
+        if (!communityExist) {
+            return res.status(400).json({ message: 'no community exists' });
+        }
+
+        // Ensure members is initialized as an array if it's undefined
+        if (!communityExist.members) {
+            communityExist.members = [];
+        }
+
+        const imageExist = await profile.findOne({ username: username });
+        let image;
+        if (imageExist && imageExist.image !== "") {
+            image = imageExist.image;
+        }
+
+        const newMember = {
+            image: image,
+            username: username
+        };
+
+        // Push the new member into the members array
+        communityExist.members.push(newMember);
+
+        // Save the updated community document
+        await communityExist.save();
+
+        res.status(200).json({ message: "joined successfully" });
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: 'error in join community' });
+    }
+};
