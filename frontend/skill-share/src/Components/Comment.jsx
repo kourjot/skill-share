@@ -20,7 +20,7 @@ const Comment= (props) => {
         console.log("Sending Comment....",token,id,newComment)
         const response = await axios.post(
           `https://skill-share-c93a.onrender.com/commentPost/${id}`,
-          newComment,
+          { text: input.trim() },
           {
             headers: {
               Authorization: token,
@@ -40,9 +40,10 @@ const Comment= (props) => {
   };
 
   return (
-    <div className='Comment-container'>
-      <h2 style={{ marginBottom: '10px' }}>Comments</h2>
+    <div className="comment-box">
       <FiX className='close-button' size={24} color="black" onClick={()=>setComment(!isComment)} />
+      <h2 style={{ marginBottom: '10px' }}>Comments</h2>
+    <div className='Comment-container'>
       <ul className='PrevComment' style={{ listStyleType: 'none', padding: 0 }}>
         {postcomments.map((comment, index) => (
           <li
@@ -52,30 +53,23 @@ const Comment= (props) => {
             {comment.username}--{comment.text}
           </li>
         ))}
-      </ul>
-      <div className='Comment-input-box' >
+      </ul> 
+    </div>
+    <div className='Comment-input-box' >
         <input
           type="text"
           value={input}
           onChange={handleInputChange}
-          placeholder="Add a comment..."
+          placeholder="give a comment..."
         />
         <button
           onClick={handleAddComment}
-          style={{
-            padding: '8px 16px',
-            border: 'none',
-            backgroundColor: '#007bff',
-            color: '#fff',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
+          className='comment-send-btn'
         >
           Send
         </button>
       </div>
-      
-    </div>
+  </div>
   );
 };
 

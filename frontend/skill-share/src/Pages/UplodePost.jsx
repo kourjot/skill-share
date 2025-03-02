@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "../Styles/PostUpload.css";
 import axios from "axios";
-
+import NavBar from "@/Components/Navbar";
+import Aside from "@/Components/Aside";
 function PostUpload() {
     const [post, setPost] = useState({
         image: null,
@@ -55,6 +56,9 @@ function PostUpload() {
     };
 
     return (
+        <>
+        <NavBar/>
+        <Aside/>
         <div className="post-upload-container">
             <div className="post-card">
                 <h2>Share Your Skill/Idea</h2>
@@ -92,6 +96,7 @@ function PostUpload() {
                 </form>
             </div>
         </div>
+    </>
     );
 }
 

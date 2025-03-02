@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "../Styles/UpdateProfile.css";
 import axios from "axios"; // Ensure axios is imported
-
+import Aside from "@/Components/Aside";
+import NavBar from "@/Components/Navbar";
 function UpdateProfile() {
     const [userProfile, setUserProfile] = useState({
         skills: "",
@@ -53,6 +54,9 @@ function UpdateProfile() {
     };
 
     return (
+        <>
+        <NavBar/>
+        <Aside/>
         <div className="profile-container">
             <div className="profile-card">
                 <h2>Edit Profile</h2>
@@ -91,6 +95,7 @@ function UpdateProfile() {
                 </form>
             </div>
         </div>
+    </>
     );
 }
 

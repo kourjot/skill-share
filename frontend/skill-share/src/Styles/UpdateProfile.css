@@ -3,13 +3,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+    
     padding: 50px;
-    margin-top: 60px;
+    margin-top: 90px;
     padding-bottom: 20px;
     min-height: fit-content;
 }
-
+@media screen and (max-width:480px) {
+    .profile-container{
+        padding: 10px;
+        position: relative;
+        left: -10%;
+    }
+    
+}
 /* Profile Card */
 .profile-card {
     background: #fff;
