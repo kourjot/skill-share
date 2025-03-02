@@ -6,7 +6,7 @@ import {login,registration,allphoto} from "../controller/userController.js"
 import {sendRegisterOtp} from "../controller/nodemailerController.js"
 
 import { profileMulter } from "../middleware/multer.js"
-import { makeCommunity ,showAllCommunity,joinCommunity,commMessage} from "../controller/community.js";
+import { makeCommunity ,showAllCommunity,joinCommunity,commMessage,getMessage} from "../controller/community.js";
 import { uploadImage ,getAillImage} from "../controller/postImage.js"
 import { profileUpload,getProfile,getUserProfileByName} from "../controller/userProfile.js"
 import  {tokenVerify} from "../middleware/tokenMiddleware.js"
@@ -37,4 +37,5 @@ userRouter.post("/makeCommunity",makeCommunity)
 userRouter.get("/getCommunity",showAllCommunity)
 userRouter.post("/joinCommunity",joinCommunity)
 userRouter.post("/postMessage",commMessage)
+userRouter.get("/getMessage/:name",getMessage)
 export {userRouter}
