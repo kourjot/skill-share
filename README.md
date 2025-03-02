@@ -1,32 +1,11 @@
 # Skill-Share
 
-![Skill-Share Logo](https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png)
 
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 20px;
-  }
-  h1, h2, h3 {
-    color: #0056b3;
-  }
-  ul {
-    list-style-type: square;
-  }
-  code {
-    background-color: #eaeaea;
-    padding: 3px;
-    border-radius: 5px;
-  }
-  img {
-    display: block;
-    margin: 0 auto;
-    max-width: 200px;
-    height: auto;
-  }
-</style>
+
+<p align="center">
+  <img src="https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png" alt="Skill-Share Logo" width="200">
+</p>
+
 
 ## Introduction
 
