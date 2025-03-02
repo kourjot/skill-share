@@ -4,6 +4,8 @@
   <img src="https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png" 
        alt="Skill-Share Logo" class="w-32 h-32 rounded-full object-cover border-radius: 50%;">
 </p>
+<img src="https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png" alt="Rounded Image" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+
 
 
 
