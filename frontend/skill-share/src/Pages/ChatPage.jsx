@@ -7,46 +7,69 @@ const ChatPage = () => {
     const [selectedChat, setSelectedChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const inputRef = useRef(null);
-    const [communityname,setcommunityname]=useState("")
-    const [community,setcommunity]=useState([])
+    const [communityname, setcommunityname] = useState("");
+    const [community, setCommunity] = useState([]);
+    const messagesEndRef = useRef(null);
 
-    const chats = [
-        { id: 1, name: 'John Doe', lastMessage: 'Hey, how are you?' },
-        { id: 2, name: 'Jane Smith', lastMessage: 'Did you get my message?' },
-        { id: 3, name: 'Alex Johnson', lastMessage: 'Let’s catch up later!' }
-    ];
-    useEffect(()=>{
-        getCommunity()
-    },[])
+    // Fetch communities on component mount
     useEffect(() => {
-        if (selectedChat) {
+        getCommunity();
+    }, []);
+
+    // Fetch messages when community name changes
+    useEffect(() => {
+        if (communityname) {
             getChatFromBackend(communityname);
         }
     }, [communityname]);
 
-    ///
-    async function getCommunity(){
-        try{
-          const token = localStorage.getItem("token");
-          const responce= await axios.get("https://skill-share-c93a.onrender.com/getCommunity")
-          console.log(responce.data.data)
-          setcommunity(responce.data.data)
-          console.log(community)
-          
-        }
-        catch(err){
-          console.log(err.message)
-        }
-      }
+    // Scroll to bottom of messages when messages update
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
 
-    ///
+    async function getCommunity() {
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.get("https://skill-share-c93a.onrender.com/getCommunity", {
+                headers: {
+                    Authorization: token,
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            if (response.data && response.data.data) {
+                setCommunity(response.data.data);
+                console.log("Communities loaded:", response.data.data);
+            } else {
+                console.log("No communities found");
+            }
+        } catch (err) {
+            console.log("Error fetching communities:", err.message);
+        }
+    }
+
     async function handleChat() {
         const message = inputRef.current.value;
         if (!message.trim()) return;
-        sendMessageToBackend(communityname,message)
+        
+        // Add message to local state for immediate feedback
+        const newMessage = {
+            username: 'me',
+            messages: message,
+            timestamp: new Date().toISOString()
+        };
+        
+        setMessages(prevMessages => [...prevMessages, newMessage]);
+        
+        // Send to backend
+        await sendMessageToBackend(communityname, message);
+        
+        // Clear input field
+        inputRef.current.value = '';
     }
 
-    async function sendMessageToBackend(name,message) {
+    async function sendMessageToBackend(name, message) {
         try {
             const token = localStorage.getItem("token");
             const response = await axios.post("https://skill-share-c93a.onrender.com/postMessage",
@@ -60,24 +83,21 @@ const ChatPage = () => {
             );
 
             if (response.status === 200) {
-                console.log("Message sent to backend successfully");
-                console.log(response.status)
-            } 
-            else {
-                console.log("Failed to send message to backend");
-                console.log(response.status)
+                console.log("Message sent successfully");
+                // Refresh messages to show all updated content including other users' messages
+                getChatFromBackend(name);
+            } else {
+                console.log("Failed to send message");
             }
-        } 
-        catch (err) {
-            console.log("Error sending message to backend:", err.message);
-            //console.log(response.status)
+        } catch (err) {
+            console.log("Error sending message:", err.message);
         }
     }
 
-    async function getChatFromBackend(chatId) {
+    async function getChatFromBackend(chatName) {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.get(`https://skill-share-c93a.onrender.com/getMessage/${chatId}`,
+            const response = await axios.get(`https://skill-share-c93a.onrender.com/getMessage/${chatName}`,
                 {
                     headers: {
                         Authorization: token,
@@ -89,7 +109,6 @@ const ChatPage = () => {
             if (response.status === 200) {
                 console.log("Messages fetched successfully");
                 setMessages(response.data.messages);
-                console.log(response.data.messages)
             } else {
                 console.log("Failed to fetch messages");
             }
@@ -98,44 +117,69 @@ const ChatPage = () => {
         }
     }
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleChat();
+        }
+    };
+
     return (
         <>
             <NavBar />
             <div className="chat-container">
                 <div className="chat-sidebar">
-                    <h2>Chats</h2>
-                    {community.map(chat => (
-                        <div key={chat["_id"]}
-                            className={`chat-item ${selectedChat === chat["_id"] ? 'active' : ''}`}
-                            onClick={() => {
-                                setSelectedChat(chat["_id"])
-                                setcommunityname(chat.name)
-                                console.log(communityname)
-                            }}>
-                            <p className="chat-name">{chat.name}</p>
-                            {/* <p className="chat-preview">{chat.lastMessage}</p> */}
-                        </div>
-                    ))}
+                    <h2>Communities</h2>
+                    {community.length > 0 ? (
+                        community.map(chat => (
+                            <div 
+                                key={chat._id}
+                                className={`chat-item ${selectedChat === chat._id ? 'active' : ''}`}
+                                onClick={() => {
+                                    setSelectedChat(chat._id);
+                                    setcommunityname(chat.name);
+                                }}
+                            >
+                                <p className="chat-name">{chat.name}</p>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="no-communities">No communities available</div>
+                    )}
                 </div>
                 <div className="chat-window">
                     {selectedChat ? (
                         <>
-                            <div className="chat-header">Chat with {chats.find(c => c.id === selectedChat)?.name}</div>
+                            <div className="chat-header">{communityname}</div>
                             <div className="messages">
-                                {messages.map((msg, index) => (
-                                    <div key={index} className={`message ${msg.username === 'me' ? 'sent' : 'received'}`}>
-                                    <p><strong>{msg.username}</strong></p>
-                                    <p>{msg.messages}</p>
-                                    {msg.image && <img src={msg.image} alt="Attachment" className="message-image" />}
-                                </div>
-                                ))}
+                                {messages.length > 0 ? (
+                                    messages.map((msg, index) => (
+                                        <div 
+                                            key={index} 
+                                            className={`message ${msg.username === 'me' ? 'sent' : 'received'}`}
+                                        >
+                                            <p><strong>{msg.username}</strong></p>
+                                            <p>{msg.messages}</p>
+                                            {msg.image && <img src={msg.image} alt="Attachment" className="message-image" />}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="no-messages">No messages yet. Start the conversation!</div>
+                                )}
+                                <div ref={messagesEndRef} />
                             </div>
                             <div className="message-input">
-                                <input type="text" placeholder="Type a message..." ref={inputRef} />
-                                <button onClick={() => { handleChat(); sendMessageToBackend(selectedChat, inputRef.current.value); }}>Send</button>
+                                <input 
+                                    type="text" 
+                                    placeholder="Type a message..." 
+                                    ref={inputRef}
+                                    onKeyPress={handleKeyPress}
+                                />
+                                <button onClick={handleChat}>Send</button>
                             </div>
                         </>
-                    ) : <div className="no-chat">Select a chat to start messaging</div>}
+                    ) : (
+                        <div className="no-chat">Select a community to start messaging</div>
+                    )}
                 </div>
             </div>
         </>
