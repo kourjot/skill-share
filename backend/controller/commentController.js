@@ -4,15 +4,16 @@ import jwt from "jsonwebtoken"
 import "dotenv/config"
 
 const commentPost=async(req,res)=>{
+    console.log("7")
     const  token  = req.headers.authorization;
    
       if (!token) {
           return res.status(404).json({ message: "Token needed" });
       }
     const { postId} = req.params;
-   
+   console.log(postId)
     const { text } = req.body;
-    
+    console.log(text)
     try{
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         
@@ -39,7 +40,7 @@ const commentPost=async(req,res)=>{
         // console.log("Updated comments array:", ImageExist.comments);y
         await ImageExist.save()
         res.status(201).json({message:"comment added successfully"})
-
+console.log("43")
     }catch(err){
         console.log("Error in comment",err);
         return res.status(500).json({message:"server error"})
