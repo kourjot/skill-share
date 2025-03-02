@@ -139,7 +139,7 @@ npm start
 - 📤 **File Uploads:** Multer, Cloudinary
 - 🛡️ **Security:** Argon2 for password hashing
 - ✉️ **Email Service:** Nodemailer
-- 🎨 **Frontend:** React, Tailwind CSS
+- 🎨 **Frontend:** React, JavaScript 
 - 🚀 **Deployment:** Render (Backend), Netlify (Frontend)
 
 ---
