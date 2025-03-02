@@ -110,3 +110,24 @@ export const joinCommunity = async (req, res) => {
         res.status(500).json({ message: 'error in join community' });
     }
 };
+
+
+export const commMessage=async(req,res)=>{
+    const token=req.headers.authorization
+    if(!token){
+        return req.status(404).json({message:"token needed"})
+    }
+    const {communityId,message}=req.body
+    try{
+        const decoded=jwt.verify(token, process.env.JWT_SECRET_KEY)
+        if(!decoded){
+            return res.status(404).json({message:"token not valid"})
+        }
+        const communityExist=await community.findOne({_id:communityId})
+        if(!communityExist){
+            return res.status(400).json({message:"community not exist"})
+        }
+    }catch(err){
+        return res.status(500).json({message:"error in community message"})
+    }
+}
