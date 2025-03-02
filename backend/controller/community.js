@@ -47,7 +47,7 @@ export const makeCommunity=async(req,res)=>{
 
 export const showAllCommunity=async(req,res)=>{
     try{
-        const allCommunity = await community.find({}, { name: 1, _id: 0 })
+        const allCommunity = await community.find({}, { name: 1, _id: 1 })
         res.status(200).json({data:allCommunity})
     }catch(err){
         res.status(500).json({messgae:"error in get all community"})
@@ -133,7 +133,7 @@ export const commMessage = async (req, res) => {
         }
 
         const { username, email } = decoded;
-        console.log(username);
+        // console.log(username);
 
         // Find the community by name
         const communityExist = await community.findOne({ name: name });
