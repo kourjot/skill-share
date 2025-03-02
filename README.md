@@ -20,7 +20,7 @@
   }
 </style>
 
-![Skill-Share Logo](./path-to-logo.png)
+![Skill-Share Logo](https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png)
 
 ## Introduction
 
