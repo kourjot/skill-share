@@ -33,16 +33,14 @@ function Aside(props) {
                     <FiPlusSquare className="nav-icon" /> {isOpen && <span>Post</span>}
                 </NavLink>
 
-<<<<<<< HEAD
                 {/* Fixed Community Link */}
                 <div className="nav-item" onClick={() => setCommunity(!isCommunity)}>
                     <FiPlusSquare className="nav-icon" /> {isOpen && <span>Community</span>}
                 </div>
-=======
                 <NavLink className="nav-item">
                 <FiPlusSquare className="nav-icon" onClick={()=>(setCommunity(!isCommunity))}/> {isOpen && <span>Create Community</span>}
                 </NavLink>
->>>>>>> f96611187773681fd8b9a5cad14b89393ab49e51
+
 
                 <NavLink to="/profile/" className="nav-item">
                     <FiUser className="nav-icon" /> {isOpen && <span>Profile</span>}
