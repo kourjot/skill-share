@@ -122,14 +122,14 @@ export const commMessage=async(req,res)=>{
     if(!token){
         return req.status(404).json({message:"token needed"})
     }
-    const {communityId,message}=req.body
+    const {name,message}=req.body
     try{
         const decoded=jwt.verify(token, process.env.JWT_SECRET_KEY)
         if(!decoded){
             return res.status(404).json({message:"token not valid"})
         }
         const {username,email}=decoded
-        const communityExist=await community.findOne({_id:communityId})
+        const communityExist=await community.findOne({name:name})
         if(!communityExist){
             return res.status(400).json({message:"community not exist"})
         }
