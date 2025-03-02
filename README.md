@@ -6,6 +6,7 @@
        alt="Skill-Share Logo" width=50% height= 50% style="border-radius:50; object-fit: contain;">
 </p>
 
+<img src="https://res.cloudinary.com/div73bxig/image/upload/v1740906964/kq2y8fboaa5rtlxzwwsq.png" alt="Round Image" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover;">
 
 
 ## Introduction
