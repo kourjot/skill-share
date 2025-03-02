@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiHome, FiSearch, FiPlusSquare, FiHeart, FiUser, FiMenu } from "react-icons/fi";
+import { FiHome, FiSearch, FiPlusSquare, FiHeart, FiUser,FiEdit, FiMenu } from "react-icons/fi";
 import "../Styles/NavBar.css";
 import { NavLink } from "react-router-dom";
 function NavBar() {
@@ -22,7 +22,7 @@ function NavBar() {
                 <NavLink to='/home'><FiHome className="nav-icon" /></NavLink>
                 
                 <FiSearch className="nav-icon mobile-hide" />
-                <NavLink to="/uploadpost/"><FiPlusSquare className="nav-icon" /></NavLink>
+                <NavLink to="/uploadpost/"><FiEdit className="nav-icon" /></NavLink>
                 
                 <NavLink to="/likedpost/"><FiHeart className="nav-icon" /></NavLink>
                 <NavLink to='/profile/'><FiUser className="nav-icon" /></NavLink>

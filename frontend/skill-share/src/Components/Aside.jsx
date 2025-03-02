@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { FiHome, FiSearch, FiMessageSquare, FiPlusSquare, FiHeart, FiUser, FiMenu } from "react-icons/fi";
+import { FiHome, FiSearch, FiMessageSquare, FiPlusSquare, FiHeart, FiUser,FiEdit, FiMenu ,FiUsers } from "react-icons/fi";
 import "../Styles/Aside.css";
 import { NavLink } from "react-router-dom";
+import { HiUserGroup } from "react-icons/hi";
 
 function Aside(props) {
     const [isOpen, setIsOpen] = useState(true);
@@ -22,15 +23,15 @@ function Aside(props) {
                 </NavLink>
                 
                 <NavLink to="/" className="nav-item">
-                    <FiSearch className="nav-icon" /> {isOpen && <span>Search</span>}
+                    <HiUserGroup className="nav-icon" /> {isOpen && <span>Community App</span>}
                 </NavLink>
                 
                 <NavLink to="/Community/" className="nav-item">
-                    <FiMessageSquare className="nav-icon" /> {isOpen && <span>Communities</span>}
+                    <FiUsers className="nav-icon" /> {isOpen && <span>Communities</span>}
                 </NavLink>
 
                 <NavLink to="/uploadpost/" className="nav-item">
-                    <FiPlusSquare className="nav-icon" /> {isOpen && <span>Post</span>}
+                    <FiEdit className="nav-icon" /> {isOpen && <span>Post</span>}
                 </NavLink>
                 <NavLink className="nav-item">
                 <FiPlusSquare className="nav-icon" onClick={()=>(setCommunity(!isCommunity))}/> {isOpen && <span>Create Community</span>}
