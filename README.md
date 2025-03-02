@@ -1,65 +1,89 @@
--Skill-Share
+# Skill-Share
 
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+  }
+  h1, h2, h3 {
+    color: #0056b3;
+  }
+  ul {
+    list-style-type: square;
+  }
+  code {
+    background-color: #eaeaea;
+    padding: 3px;
+    border-radius: 5px;
+  }
+</style>
 
+![Skill-Share Logo](./path-to-logo.png)
 
-Introduction
+## Introduction
 
-Skill-Share is a community-driven platform designed to help users share and enhance their skills through collaboration. Users can join communities, post images, comment on posts, like content, and authenticate via GitHub or email/password. The platform fosters engagement by enabling users to interact with others who share similar interests.
+Skill-Share is a **community-driven platform** designed to help users share and enhance their skills through collaboration. Users can:
 
-🚀 Project Features
+- Join communities
+- Post images
+- Comment on posts
+- Like content
+- Authenticate via **GitHub or email/password**
 
-1. User Authentication
+The platform fosters engagement by enabling users to interact with others who share similar interests.
 
-Secure registration and login using email/password.
+---
 
-GitHub authentication via OAuth.
+## 🚀 Project Features
 
-Token-based authentication for secure API access.
+### 1. **User Authentication**
 
-2. Profile Management
+- 🔒 Secure registration and login using **email/password**.
+- 🔗 GitHub authentication via **OAuth**.
+- 🛡️ Token-based authentication for secure API access.
 
-Users can create and customize their profiles.
+### 2. **Profile Management**
 
-Upload and manage profile pictures.
+- 📝 Users can create and customize their profiles.
+- 📸 Upload and manage profile pictures.
+- 🔍 Fetch user profiles by username.
 
-Fetch user profiles by username.
+### 3. **Community Features**
 
-3. Community Features
+- 👥 Users can **create** and **join** communities.
+- 📜 View all available communities.
 
-Users can create and join communities.
+### 4. **Post Management**
 
-View all available communities.
+- 🖼️ Upload images.
+- 📤 Retrieve all user-uploaded posts.
 
-4. Post Management
+### 5. **Comment & Like System**
 
-Upload images.
+- 💬 Users can **comment** on posts.
+- 📝 Retrieve all comments for a post.
+- ❤️ **Like** photos to show appreciation.
 
-Retrieve all user-uploaded posts.
+### 6. **Password Management**
 
-5. Comment & Like System
+- 🔑 OTP-based registration.
+- 🔄 Forgot and reset password functionalities.
 
-Users can comment on posts.
+---
 
-Retrieve all comments for a post.
+## 🏗️ Project Type
 
-Like photos to show appreciation.
+- **Fullstack**
 
-6. Password Management
+## 📌 Repository Link
 
-OTP-based registration.
+🔗 [GitHub Repository](https://github.com/kourjot/skill-share.git)
 
-Forgot and reset password functionalities.
+## 🖥️ Directory Structure
 
-🏗️ Project Type
-
-Fullstack
-
-📌 Repository Link
-
-GitHub Repository
-
-🖥️ Directory Structure
-
+```bash
 SKILL-SHARE/
 ├─ backend/
 │  ├─ app.js
@@ -72,85 +96,83 @@ SKILL-SHARE/
 │  ├─ src/
 │  ├─ components/
 │  ├─ pages/
+```
 
-🛠️ Installation & Getting Started
+---
 
-Backend Setup
+## 🛠️ Installation & Getting Started
 
+### Backend Setup
+
+```bash
 cd backend
 npm install
 npm start
+```
 
-Frontend Setup
+### Frontend Setup
 
+```bash
 cd frontend
 npm install
 npm start
+```
 
-📡 API Endpoints
+---
 
-GET Requests
+## 📡 API Endpoints
 
-/getprofile - Get user profile
+### **GET Requests**
 
-/getUserProfileByName/:username - Get profile by username
+- 🔹 `/getprofile` - Get user profile
+- 🔹 `/getUserProfileByName/:username` - Get profile by username
+- 🔹 `/getMyPosts` - Retrieve user’s uploaded posts
+- 🔹 `/getAllComments/:postId` - Get comments for a specific post
+- 🔹 `/getCommunity` - Retrieve all available communities
 
-/getMyPosts - Retrieve user’s uploaded posts
+### **POST Requests**
 
-/getAllComments/:postId - Get comments for a specific post
+- 🔹 `/otp-register` - Send OTP for registration
+- 🔹 `/sign-in` - Register a user
+- 🔹 `/log-in` - Login a user
+- 🔹 `/forgotPassword` - Send reset password link
+- 🔹 `/resetPassword` - Reset user password
+- 🔹 `/uploadPost` - Upload an image
+- 🔹 `/commentPost/:postId` - Comment on a post
+- 🔹 `/likePhoto/:postId` - Like a photo
+- 🔹 `/makeCommunity` - Create a new community
+- 🔹 `/joinCommunity/:name` - Join a community
 
-/getCommunity - Retrieve all available communities
+---
 
-POST Requests
+## 🏗️ Technology Stack
 
-/otp-register - Send OTP for registration
+- 🖥️ **Backend:** Node.js, Express.js, MongoDB, Mongoose
+- 🔐 **Authentication:** Passport.js, JWT, OAuth (GitHub)
+- 📤 **File Uploads:** Multer, Cloudinary
+- 🛡️ **Security:** Argon2 for password hashing
+- ✉️ **Email Service:** Nodemailer
+- 🎨 **Frontend:** React, Tailwind CSS
+- 🚀 **Deployment:** Render (Backend), Netlify (Frontend)
 
-/sign-in - Register a user
+---
 
-/log-in - Login a user
+## 🎯 Future Enhancements
 
-/forgotPassword - Send reset password link
+- 📢 Implement real-time notifications for comments and likes.
+- 🔍 Add a search feature to find specific communities and users.
+- 🎨 Improve UI/UX for better user engagement.
 
-/resetPassword - Reset user password
+---
 
-/uploadPost - Upload an image
-
-/commentPost/:postId - Comment on a post
-
-/likePhoto/:postId - Like a photo
-
-/makeCommunity - Create a new community
-
-/joinCommunity/:name - Join a community
-
-🏗️ Technology Stack
-
-Backend: Node.js, Express.js, MongoDB, Mongoose
-
-Authentication: Passport.js, JWT, OAuth (GitHub)
-
-File Uploads: Multer, Cloudinary
-
-Security: Argon2 for password hashing
-
-Email Service: Nodemailer
-
-Frontend: React, Tailwind CSS
-
-Deployment: Render (Backend), Netlify (Frontend)
-
-🎯 Future Enhancements
-
-Implement real-time notifications for comments and likes.
-
-Add a search feature to find specific communities and users.
-
-Improve UI/UX for better user engagement.
-
-🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Feel free to fork the repository and submit pull requests.
 
-📜 License
+---
+
+## 📜 License
 
 This project is licensed under the ISC License.
+
+
