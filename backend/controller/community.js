@@ -123,10 +123,24 @@ export const commMessage=async(req,res)=>{
         if(!decoded){
             return res.status(404).json({message:"token not valid"})
         }
+        const {username,email}=decoded
         const communityExist=await community.findOne({_id:communityId})
         if(!communityExist){
             return res.status(400).json({message:"community not exist"})
         }
+        const photoExist=await profile.findOne({username:username})
+        let image=""
+        if(photoExist&&photoExist.image!=""){
+            image=photoExist.image
+        }
+        const newMessage={
+            image,
+            username,
+            message
+        }
+        communityExist.messages.push(newMessage)
+        await communityExist.save()
+        res.status(200).json({message:"sent sucessfully"})
     }catch(err){
         return res.status(500).json({message:"error in community message"})
     }
