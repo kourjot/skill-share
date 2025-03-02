@@ -83,14 +83,15 @@ const ChatPage = () => {
             );
 
             if (response.status === 200) {
-                console.log("Message sent successfully");
+                //console.log("Message sent successfully");
                 // Refresh messages to show all updated content including other users' messages
                 getChatFromBackend(name);
             } else {
-                console.log("Failed to send message");
+                //console.log("Failed to send message");
             }
         } catch (err) {
-            console.log("Error sending message:", err.message);
+            //console.log("Error sending message:", err.message);
+            alert("error occure")
         }
     }
 
@@ -107,13 +108,15 @@ const ChatPage = () => {
             );
 
             if (response.status === 200) {
-                console.log("Messages fetched successfully");
+                //console.log("Messages fetched successfully");
                 setMessages(response.data.messages);
             } else {
-                console.log("Failed to fetch messages");
+                
+                // console.log("Failed to fetch messages");
             }
         } catch (err) {
-            console.log("Error fetching messages:", err.message);
+            alert("Some error occure")
+            //console.log("Error fetching messages:", err.message);
         }
     }
 
