@@ -25,18 +25,13 @@ function Aside(props) {
                     <FiSearch className="nav-icon" /> {isOpen && <span>Search</span>}
                 </NavLink>
                 
-                <NavLink to="/messages" className="nav-item">
+                <NavLink to="/Community/" className="nav-item">
                     <FiMessageSquare className="nav-icon" /> {isOpen && <span>Communities</span>}
                 </NavLink>
 
                 <NavLink to="/uploadpost/" className="nav-item">
                     <FiPlusSquare className="nav-icon" /> {isOpen && <span>Post</span>}
                 </NavLink>
-
-                {/* Fixed Community Link */}
-                <div className="nav-item" onClick={() => setCommunity(!isCommunity)}>
-                    <FiPlusSquare className="nav-icon" /> {isOpen && <span>Community</span>}
-                </div>
                 <NavLink className="nav-item">
                 <FiPlusSquare className="nav-icon" onClick={()=>(setCommunity(!isCommunity))}/> {isOpen && <span>Create Community</span>}
                 </NavLink>

@@ -12,6 +12,7 @@ const CommunityPage = () => {
     const [postcomments,setComments]=useState(null)
     const [isCommunity,setCommunity]=useState(false)
     const [community,setcommunity]=useState([])
+    
     async function getCommunity(){
       try{
         const token = localStorage.getItem("token");
