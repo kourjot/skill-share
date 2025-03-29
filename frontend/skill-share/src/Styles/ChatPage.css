@@ -231,7 +231,7 @@
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width:768px) {
     .chat-container {
         border-radius: 0;
         height: calc(100vh - 60px);
@@ -239,7 +239,20 @@
     }
     
     .chat-sidebar {
-        display: none;
+        height: 50px;
+        position: fixed;
+        flex-direction: row;
+        top:10%;
+        right: 0%;
+        display: flex;
+        scrollbar-width: none;
+        z-index: 2000;
+        
+    
+    }
+    .chat-sidebar h2{
+        height: auto;
+        
     }
     
     .chat-window {

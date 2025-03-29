@@ -24,7 +24,7 @@ export default function Profile() {
           },
         });
         setUserProfile(response.data.userProfile); // Set the response data into state
-        console.log(response.data)
+        //console.log(response.data)
         localStorage.setItem("ProfilePhoto",response.data.userProfile.image)
         setLoading(false); // Stop loading once data is fetched
       } catch (error) {

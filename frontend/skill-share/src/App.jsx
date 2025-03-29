@@ -29,7 +29,7 @@ function App() {
         <Route element={<PrivateRoute isAuthenticate={isAuthenticated} />}>
             <Route path="/profile/" element={<Profile />} />
         </Route>
-        <Route path="/LoginForm" element={<LoginForm/>}/>
+        <Route path="/LoginForm/" element={<LoginForm/>}/>
         <Route path="/signin/" element={<SignIn/>}/>
         <Route path="/updateprofile/" element={<UpdateProfile />} />
         <Route path="/uploadpost/" element={<PostUpload />} />

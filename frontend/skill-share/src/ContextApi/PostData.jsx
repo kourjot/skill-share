@@ -19,7 +19,7 @@ export const PostDataContextProvider=({children})=>{
             setPostdata(responce.data.photos)
         }
         catch(error){
-            alert(error.message)
+            console.log(error.message)
         }
 
     }

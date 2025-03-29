@@ -47,7 +47,7 @@ const MainPost = () => {
   }
   return (
     <>
-    <NavBar/>
+    <NavBar setCommunity={setCommunity} isCommunity={isCommunity}/>
     <Aside setCommunity={setCommunity} isCommunity={isCommunity}/>
     {isComment && <Comment id={selectedPostId}
      setComment={setComment} isComment={isComment}/>}
@@ -72,7 +72,7 @@ const MainPost = () => {
             {/* {post.images.map((img, index) => (
             <img key={index} src={img} alt="Post screenshot" className="post-image" style={{maxHeight:"200px"}}/>
             ))} */}
-            <img src={post.photo} alt="Post screenshot" className="post-image" style={{maxHeight:"200px"}}/>
+            <img src={post.photo} alt="Post screenshot" className="post-image" />
             
         </div>
         <div className="post-actions">

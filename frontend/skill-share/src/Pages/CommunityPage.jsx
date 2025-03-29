@@ -59,7 +59,7 @@ const CommunityPage = () => {
     
             if (response.status >= 200 && response.status < 300) {
                 console.log("Successfully joined the community:", response.data);
-                alert("join SUcess")
+                alert("Community Joined ")
             } else {
                 console.error("Failed to join the community. Status:", response.status);
             }
@@ -70,7 +70,7 @@ const CommunityPage = () => {
     
   return (
     <>
-    <NavBar/>
+    <NavBar setCommunity={setCommunity} isCommunity={isCommunity}/>
     <Aside setCommunity={setCommunity} isCommunity={isCommunity}/>
     {isComment && <Comment id={selectedPostId}
      setComment={setComment} isComment={isComment}/>}
