@@ -5,9 +5,7 @@ import jwt from "jsonwebtoken"
 
 import argon2 from "argon2"
 import "dotenv/config"
-
-
- const registration=async(req,res)=>{
+const registration=async(req,res)=>{
     const{username,email,password,otp}=req.body
     if(!username || !email  || !password || !otp){
         return res.status(404).json({msg:"all fields are required"})

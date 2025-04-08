@@ -33,7 +33,8 @@ const profileUpload = async (req, res) => {
           const { email,username } = decoded;
         // console.log(email,username)
           // Check if the user exists in the database
-          const userExist = await user.findOne({ email });
+          const userExist = await user.find
+          One({ email });
           if (!userExist) {
               return res.status(400).json({ message: "User does not exist" });
           }
