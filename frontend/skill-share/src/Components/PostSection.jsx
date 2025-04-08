@@ -3,7 +3,7 @@ import '../Styles/Posts.css'
 import { PostDataContext } from '@/ContextApi/PostData';
 export default function Post({ user, postImage, caption, likes }) {
   const [postdata,setPostdata]=useContext(PostDataContext)
-  console.log(postdata)
+  //console.log(postdata)
   return (
     <>
     <div className="posts">

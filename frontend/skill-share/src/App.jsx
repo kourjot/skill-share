@@ -15,6 +15,7 @@ import LikePage from "./Pages/LikePage";
 import Comment from "./Components/Comment";
 import CommunityInputComponent from "./Components/Community";
 import { CommunityPage } from "./Pages/CommunityPage";
+import ChatPage from "./Pages/ChatPage";
 function App() {
   const isAuthenticated = true; // Replace with actual authentication logic
 
@@ -28,12 +29,13 @@ function App() {
         <Route element={<PrivateRoute isAuthenticate={isAuthenticated} />}>
             <Route path="/profile/" element={<Profile />} />
         </Route>
-        <Route path="/LoginForm" element={<LoginForm/>}/>
+        <Route path="/LoginForm/" element={<LoginForm/>}/>
         <Route path="/signin/" element={<SignIn/>}/>
         <Route path="/updateprofile/" element={<UpdateProfile />} />
         <Route path="/uploadpost/" element={<PostUpload />} />
         <Route path="/likedpost/" element={<LikePage/>} />
-        <Route path="/communitys" element={<CommunityPage/>}/>
+        <Route path="/Community/" element={<CommunityPage/>}/>
+        <Route path="/Chats" element={<ChatPage/>}/>
       </Routes>
     </>
   );

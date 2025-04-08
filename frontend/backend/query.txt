@@ -1,0 +1,70 @@
+userID =ref:"user"
+description string 
+photo string
+likeBy [string]
+comments [ObjectId ref:"user"]
+like:Number
+photoSchema
+
+
+git init
+git add .
+git commit -m "Initial commit: Setup project structure with Node.js, Express, and MongoDB"
+
+git commit -m "Added Express server and basic configurations"
+
+git commit -m "Configured dotenv for environment variables"
+
+git commit -m "Connected MongoDB with Mongoose and created database schema"
+
+git commit -m "Implemented user authentication (signup, login) with JWT"
+
+git commit -m "Added bcrypt for password hashing"
+
+git commit -m "Created middleware for authentication and authorization"
+
+git commit -m "Added API routes for user profile management"
+
+git commit -m "Implemented CRUD operations for posts (ideas, resources, and collaborations)"
+
+git commit -m "Added file upload functionality for resource sharing"
+
+git commit -m "Created API routes for real-time messaging and notifications"
+
+git commit -m "Integrated Redis for caching frequently accessed data"
+
+git commit -m "Implemented user skill tagging and search functionality"
+
+git commit -m "Added pagination for posts and resources"
+
+git commit -m "Configured CORS to allow cross-origin requests"
+
+git commit -m "Setup WebSockets for real-time collaboration"
+
+git commit -m "Implemented API documentation with Swagger"
+
+git commit -m "Added rate limiting to prevent abuse"
+
+git commit -m "Implemented email verification and password reset functionality"
+
+git commit -m "Created role-based access control (Admin, Moderator, User)"
+
+git commit -m "Deployed backend API to cloud (e.g., Render, Vercel, or AWS)"
+
+git commit -m "Added unit and integration tests for key API endpoints"
+
+git commit -m "Optimized database queries and improved performance"
+
+git commit -m "Fixed security vulnerabilities and improved error handling"
+
+
+
+user photo save =
+userId ref:"user"
+username string
+image [string]
+
+allImages
+
+
+mongo token image id comment 

@@ -4,6 +4,7 @@ import NavBar from "@/Components/Navbar";
 import axios from "axios";
 import '../Styles/CommunityPage.css'
 import CommunityInputComponent from "@/Components/Community";
+import { useNavigate } from "react-router-dom";
 
 const CommunityPage = () => {
     const [Postdata,setPostdata]=useState([])
@@ -12,6 +13,11 @@ const CommunityPage = () => {
     const [postcomments,setComments]=useState(null)
     const [isCommunity,setCommunity]=useState(false)
     const [community,setcommunity]=useState([])
+    const navigate=useNavigate()
+
+    function navigatetoChat(){
+      navigate("/chats")
+    }
     async function getCommunity(){
       try{
         const token = localStorage.getItem("token");
@@ -53,7 +59,7 @@ const CommunityPage = () => {
     
             if (response.status >= 200 && response.status < 300) {
                 console.log("Successfully joined the community:", response.data);
-                alert("join SUcess")
+                alert("Community Joined ")
             } else {
                 console.error("Failed to join the community. Status:", response.status);
             }
@@ -64,7 +70,7 @@ const CommunityPage = () => {
     
   return (
     <>
-    <NavBar/>
+    <NavBar setCommunity={setCommunity} isCommunity={isCommunity}/>
     <Aside setCommunity={setCommunity} isCommunity={isCommunity}/>
     {isComment && <Comment id={selectedPostId}
      setComment={setComment} isComment={isComment}/>}
@@ -82,7 +88,7 @@ const CommunityPage = () => {
             </div>
         </div>
         <button className="join-btn" onClick={()=>{joinCommunity(communit.name)}}>Join</button>
-        <button className="message-btn">Message</button>
+        <button className="message-btn" onClick={()=>navigatetoChat()}>Message</button>
         </div>
           </>
         )

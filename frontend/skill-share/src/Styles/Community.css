@@ -1,7 +1,7 @@
 .community-container {
     position: absolute;
-    top:100px;
-    left:280px;
+    top:200px;
+    left:30%;
     padding: 32px;
     max-width: 500px;
     width: 90%;
@@ -9,8 +9,16 @@
     background-color: #fff;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    z-index: 2000;
 }
 
+@media screen and (max-width:768px) {
+
+    .community-container{
+        left: 10%;
+        
+    }
+}
 .community-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);

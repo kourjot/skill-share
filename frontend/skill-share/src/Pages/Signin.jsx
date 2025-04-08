@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const SignIn = () => {
+  const navigate=useNavigate()
   const [formData, setFormData] = useState({
     otp: "",
     username: "",
@@ -41,6 +42,7 @@ const SignIn = () => {
       const data = await response.json();
       if (response.ok) {
         alert("Sign In Successful");
+        navigate("/LoginForm/")
       } else {
         alert(data.message || "Sign In Failed");
       }

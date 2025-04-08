@@ -51,6 +51,7 @@ const CommunityInputComponent = () => {
 
   return (
     <div className='community-container' >
+      <h2 style={{textAlign:"center"}}>Create Community</h2>
       <form onSubmit={handleSubmit} className='community-form'>
         <input className='community-input'
           type="text"
