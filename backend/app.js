@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-
+import cron from "node-cron"
 import passport from "./config/passport.js"; 
 import { connection } from "./config/db.js"
 
@@ -12,6 +12,11 @@ const port = process.env.PORT ||3110
 const app = express();
 app.use(cors())
 app.use(express.json());
+cron.schedule('*/14 * * * *',async()=>{
+    const data=await fetch("http://localhost:3110/")
+    let asyncData=await data.json()
+    console.log(asyncData)
+})
 app.use(passport.initialize());
 app.use(userRouter)
 app.listen(port,()=>{
