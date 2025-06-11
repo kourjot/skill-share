@@ -78,7 +78,7 @@ const profileUpload = async (req, res) => {
               const newProfile = new profile({
                   userId: userExist._id,
                   username: username,
-                  skills: skills || [],
+                  skills: skills || "",
                   description: description || '',
                   image: url || '',  // Default to empty if no image
               });
