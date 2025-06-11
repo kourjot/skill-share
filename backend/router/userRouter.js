@@ -15,6 +15,13 @@ import {commentPost,getAllComments} from "../controller/commentController.js"
 import {likePhoto} from "../controller/likeController.js"
 const userRouter = Router()
 
+userRouter.get("/",async(req,res)=>{
+    try{
+        return res.status(200).json({message:"server runs fine in every 15 minutes"})
+    }catch(err){
+        return res.status(500).json({message:err.message})
+    }
+})
 userRouter.post("/otp-register",sendRegisterOtp)
 userRouter.post("/sign-in",registration)
 userRouter.post("/log-in",login)
