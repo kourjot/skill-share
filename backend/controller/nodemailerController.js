@@ -13,6 +13,7 @@ const transport=nodemailer.createTransport({
 
  const sendRegisterOtp=async(req,res)=>{
     const {email}=req.body
+    console.log("otp send");
     try{
         const otpExist=await registerOtp.findOne({email})
         if(otpExist){

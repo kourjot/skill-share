@@ -7,6 +7,7 @@ import argon2 from "argon2"
 import "dotenv/config"
 const registration=async(req,res)=>{
     const{username,email,password,otp}=req.body
+    console.log(otp)
     if(!username || !email  || !password || !otp){
         return res.status(404).json({msg:"all fields are required"})
     }
