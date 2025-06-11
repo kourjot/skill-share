@@ -13,7 +13,7 @@ const app = express();
 app.use(cors())
 app.use(express.json());
 cron.schedule('*/14 * * * *',async()=>{
-    const data=await fetch("http://localhost:3110/")
+    const data=await fetch("https://skill-share-1-v5lq.onrender.com/")
     let asyncData=await data.json()
     console.log(asyncData)
 })
