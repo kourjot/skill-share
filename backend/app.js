@@ -11,10 +11,13 @@ const port = process.env.PORT ||3110
 const app = express();
 app.use(cors())
 app.use(express.json());
-
+app.get("/health",(req,res)=>{
+    res.send("it runs sucessfully")
+})
+console.log("new branch")
 app.use(passport.initialize());
 app.use(userRouter)
 app.listen(port,()=>{
     connection ()
-    console.log(`Server is running on port ${port} 🚀`)
+    console.log(`Server is running at ${port} 🚀`)
 })
